@@ -1,65 +1,575 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useRef, useMemo } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { motion } from 'framer-motion';
+import * as THREE from 'three';
+
+// Particle system component
+function ParticleField() {
+  const points = useRef();
+  const particleCount = 2000;
+
+  const particles = useMemo(() => {
+    const positions = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+    
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 50;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 30;
+      
+      velocities[i * 3] = (Math.random() - 0.5) * 0.02;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.02;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.02;
+    }
+    
+    return { positions, velocities };
+  }, []);
+
+  useFrame((state) => {
+    if (!points.current) return;
+    
+    const positions = points.current.geometry.attributes.position.array;
+    const time = state.clock.elapsedTime;
+    
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] += Math.sin(time * 0.5 + i) * 0.001;
+      positions[i * 3 + 1] += Math.cos(time * 0.3 + i) * 0.001;
+      positions[i * 3 + 2] += Math.sin(time * 0.4 + i) * 0.001;
+      
+      if (Math.abs(positions[i * 3]) > 25) positions[i * 3] *= -0.9;
+      if (Math.abs(positions[i * 3 + 1]) > 25) positions[i * 3 + 1] *= -0.9;
+      if (Math.abs(positions[i * 3 + 2]) > 15) positions[i * 3 + 2] *= -0.9;
+    }
+    
+    points.current.geometry.attributes.position.needsUpdate = true;
+    points.current.rotation.y += 0.0002;
+  });
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <points ref={points}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={particleCount}
+          array={particles.positions}
+          itemSize={3}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.1}
+        color="#ff0000"
+        transparent
+        opacity={0.6}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+}
+
+// Floating geometric shapes
+function FloatingShapes() {
+  const group = useRef();
+  
+  useFrame((state) => {
+    if (!group.current) return;
+    group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+    group.current.rotation.y += 0.001;
+  });
+
+  return (
+    <group ref={group}>
+      <mesh position={[-5, 2, -5]}>
+        <octahedronGeometry args={[1.5, 0]} />
+        <meshStandardMaterial
+          color="#ff0000"
+          wireframe
+          transparent
+          opacity={0.3}
+        />
+      </mesh>
+      
+      <mesh position={[6, -3, -8]}>
+        <icosahedronGeometry args={[2, 0]} />
+        <meshStandardMaterial
+          color="#ff0000"
+          wireframe
+          transparent
+          opacity={0.2}
+        />
+      </mesh>
+      
+      <mesh position={[-8, -2, -10]}>
+        <tetrahedronGeometry args={[1.8, 0]} />
+        <meshStandardMaterial
+          color="#ff0000"
+          wireframe
+          transparent
+          opacity={0.25}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+// Main 3D Scene
+function Scene() {
+  return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} color="#ff0000" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ff0000" />
+      <ParticleField />
+      <FloatingShapes />
+    </>
+  );
+}
+
+export default function TEDxHero() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        damping: 20,
+        stiffness: 100
+      }
+    }
+  };
+
+  const logoVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        damping: 15,
+        stiffness: 100
+      }
+    }
+  };
+
+  return (
+    <div className="relative min-h-screen bg-[#222222] overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+          <Scene />
+        </Canvas>
+      </div>
+
+      {/* Navigation */}
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: 'spring', damping: 20 }}
+        className="relative z-10 flex items-center justify-between px-6 md:px-12 py-6"
+      >
+        <motion.div 
+          variants={logoVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex items-center space-x-2"
+        >
+          <div className="text-white font-bold text-xl md:text-2xl">
+            TEDx<span className="text-[#ff0000]">PIEAS</span>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="hidden md:flex space-x-8 text-sm text-white"
+        >
+          <a href="#home" className="hover:text-[#ff0000] transition-colors">HOME</a>
+          <a href="#about" className="hover:text-[#ff0000] transition-colors">ABOUT</a>
+          <a href="#team" className="hover:text-[#ff0000] transition-colors">OUR TEAM</a>
+          <a href="#speakers" className="hover:text-[#ff0000] transition-colors">SPEAKERS</a>
+          <a href="#talks" className="hover:text-[#ff0000] transition-colors">TALKS</a>
+          <a href="#highlights" className="hover:text-[#ff0000] transition-colors">HIGHLIGHTS</a>
+        </motion.div>
+
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="md:hidden text-white"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </motion.button>
+      </motion.nav>
+
+      {/* Hero Content */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-6 md:px-12 text-center"
+      >
+        <motion.div variants={itemVariants} className="mb-8">
+          <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-6 bg-[#ff0000] rounded-full flex items-center justify-center border-2 border-white">
+            <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+            </svg>
+          </div>
+        </motion.div>
+
+        <motion.h1 
+          variants={itemVariants}
+          className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-4 tracking-tight"
+        >
+          AGAINST ALL ODDS
+        </motion.h1>
+
+        <motion.div 
+          variants={itemVariants}
+          className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-lg md:text-2xl text-white mb-8"
+        >
+          <span className="text-[#ff0000] font-semibold">12 APRIL 2025</span>
+          <span className="hidden md:inline text-[#ff0000]">|</span>
+          <span>PIEAS, ISLAMABAD</span>
+        </motion.div>
+
+        <motion.button
+          variants={itemVariants}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-[#ff0000] hover:bg-white hover:text-[#ff0000] text-white font-bold px-8 md:px-12 py-3 md:py-4 text-sm md:text-base uppercase tracking-wider transition-all duration-300"
+        >
+          BECOME AN ATTENDEE →
+        </motion.button>
+
+        <motion.div 
+          variants={itemVariants}
+          className="mt-16 flex flex-col items-center"
+        >
+          <p className="text-white text-sm mb-4">SCROLL DOWN</p>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <svg className="w-6 h-6 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* About Section Preview */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 bg-[#1a1a1a] py-20 px-6 md:px-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            Documentation
-          </a>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
+              <span className="text-white">We share</span>
+              <br />
+              <span className="text-[#ff0000]">ideas</span>
+              <span className="text-white"> worth</span>
+              <br />
+              <span className="text-white">spreading</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-8"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              What is TEDx?
+            </h3>
+            <p className="text-white text-base md:text-lg leading-relaxed max-w-4xl">
+              In the spirit of ideas worth spreading, TED has created a program called TEDx. 
+              TEDx is a program of local, self-organized events that bring people together to share 
+              a TED-like experience. Our event is called TEDxPIEAS, where x = independently 
+              organized TED event. At our TEDxPIEAS event, TEDTalks video and live speakers will 
+              combine to spark deep discussion and connection in a small group.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 text-[#ff0000] font-semibold flex items-center gap-2 group"
+            >
+              FIND OUT MORE 
+              <span className="group-hover:translate-x-2 transition-transform">→</span>
+            </motion.button>
+          </motion.div>
         </div>
-      </main>
+      </motion.section>
+
+      {/* Talks Section Preview */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 py-20 px-6 md:px-12 bg-[#222222]"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-12">
+            <motion.h2 
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-black text-white"
+            >
+              Talks
+            </motion.h2>
+            <motion.button
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-[#ff0000] font-semibold text-sm md:text-base flex items-center gap-2"
+            >
+              VIEW ALL TALKS →
+            </motion.button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              "What will it take to change the world?",
+              "Do what you love",
+              "Can life use plastic so many shoes",
+              "Change the narrative of change itself",
+              "Exposure adds value to personality",
+              "The path of purpose"
+            ].map((title, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className="group relative bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 overflow-hidden"
+              >
+                <div className="aspect-video bg-[#333333] relative overflow-hidden">
+                  <div className="absolute inset-0 group-hover:bg-[#ff0000]/10 transition-colors" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.2 }}
+                      className="w-16 h-16 rounded-full bg-[#ff0000] flex items-center justify-center"
+                    >
+                      <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </motion.div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#ff0000] transition-colors">
+                    {title}
+                  </h3>
+                  <p className="text-white text-sm">Speaker Name | 2025</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Speakers Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 py-20 px-6 md:px-12 bg-[#1a1a1a]"
+      >
+        <div className="max-w-7xl mx-auto">
+          <motion.h2 
+            initial={{ y: -30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black text-white mb-16 text-center"
+          >
+            Our <span className="text-[#ff0000]">Speakers</span>
+          </motion.h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {[
+              "Dr. Sarah Ahmed",
+              "Ali Hassan",
+              "Maria Khan",
+              "Omar Farooq",
+              "Fatima Malik",
+              "Usman Ali",
+              "Ayesha Butt",
+              "Hassan Raza"
+            ].map((name, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="group flex flex-col items-center"
+              >
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#333333] border-2 border-white group-hover:border-[#ff0000] transition-all duration-300 mb-4 flex items-center justify-center">
+                  <svg className="w-16 h-16 md:w-20 md:h-20 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+                <h3 className="text-white font-bold text-center group-hover:text-[#ff0000] transition-colors">
+                  {name}
+                </h3>
+                <p className="text-white text-sm text-center mt-1">Speaker</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Organizers Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 py-20 px-6 md:px-12 bg-[#222222]"
+      >
+        <div className="max-w-7xl mx-auto">
+          <motion.h2 
+            initial={{ y: -30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black text-white mb-4 text-center"
+          >
+            The <span className="text-[#ff0000]">Team</span>
+          </motion.h2>
+          <motion.p
+            initial={{ y: -20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-white text-center mb-16 text-lg"
+          >
+            Organizers & Coordinators making it happen
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { name: "Ahmed Khan", role: "Lead Organizer" },
+              { name: "Zainab Ali", role: "Event Coordinator" },
+              { name: "Bilal Shahid", role: "Marketing Head" },
+              { name: "Hira Siddiqui", role: "Logistics Manager" },
+              { name: "Fahad Iqbal", role: "Tech Lead" },
+              { name: "Sana Tariq", role: "Design Head" }
+            ].map((person, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-6 flex items-center gap-6"
+              >
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+                  <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-white font-bold text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
+                    {person.name}
+                  </h3>
+                  <p className="text-white text-sm">{person.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Footer */}
+      <footer className="relative z-10 bg-[#1a1a1a] border-t-2 border-[#333333] py-12 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+            {/* Logo and About */}
+            <div>
+              <h3 className="text-white font-bold text-2xl mb-4">
+                TEDx<span className="text-[#ff0000]">PIEAS</span>
+              </h3>
+              <p className="text-white text-sm leading-relaxed">
+                Ideas worth spreading. Join us for an unforgettable experience of innovation, inspiration, and connection.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-bold text-lg mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#about" className="text-white hover:text-[#ff0000] transition-colors text-sm">About</a></li>
+                <li><a href="#speakers" className="text-white hover:text-[#ff0000] transition-colors text-sm">Speakers</a></li>
+                <li><a href="#talks" className="text-white hover:text-[#ff0000] transition-colors text-sm">Talks</a></li>
+                <li><a href="#team" className="text-white hover:text-[#ff0000] transition-colors text-sm">Team</a></li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-white font-bold text-lg mb-4">Connect</h4>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 bg-[#333333] hover:bg-[#ff0000] transition-all duration-300 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-[#333333] hover:bg-[#ff0000] transition-all duration-300 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-[#333333] hover:bg-[#ff0000] transition-all duration-300 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t-2 border-[#333333] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-white text-sm">© 2025 TEDxPIEAS. All rights reserved.</p>
+            <p className="text-white text-sm">
+              This independent TEDx event is operated under license from TED
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
