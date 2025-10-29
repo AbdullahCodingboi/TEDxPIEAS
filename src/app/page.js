@@ -219,60 +219,165 @@ export default function TEDxHero() {
       </motion.nav>
 
       {/* Hero Content */}
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-6 md:px-12 text-center"
-      >
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-6 bg-[#ff0000] rounded-full flex items-center justify-center border-2 border-white">
-            <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-            </svg>
-          </div>
-        </motion.div>
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            {/* Left Side - Text Content */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="space-y-8"
+            >
+              {/* Event Badge */}
+              <motion.div variants={itemVariants} className="inline-block">
+                <div className="inline-flex items-center gap-3 border-2 border-white px-6 py-3">
+                  <div className="w-2 h-2 bg-[#ff0000]"></div>
+                  <span className="text-white text-sm font-bold tracking-widest">TEDx EVENT 2025</span>
+                </div>
+              </motion.div>
 
-        <motion.h1 
-          variants={itemVariants}
-          className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-4 tracking-tight"
-        >
-          AGAINST ALL ODDS
-        </motion.h1>
+              {/* Main Heading */}
+              <motion.div variants={itemVariants}>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] mb-6">
+                  TED<br />
+                  <span className="text-[#ff0000]">x</span><br />
+                 PIEAS
+                </h1>
+                <div className="w-24 h-1 bg-[#ff0000]"></div>
+              </motion.div>
 
-        <motion.div 
-          variants={itemVariants}
-          className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-lg md:text-2xl text-white mb-8"
-        >
-          <span className="text-[#ff0000] font-semibold">12 APRIL 2025</span>
-          <span className="hidden md:inline text-[#ff0000]">|</span>
-          <span>PIEAS, ISLAMABAD</span>
-        </motion.div>
+              {/* Description */}
+              <motion.p 
+                variants={itemVariants}
+                className="text-white text-lg md:text-xl leading-relaxed max-w-xl"
+              >
+                Join us for an extraordinary gathering of visionaries, innovators, and change-makers as we explore ideas that challenge conventions and inspire transformation.
+              </motion.p>
 
-        <motion.button
-          variants={itemVariants}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-[#ff0000] hover:bg-white hover:text-[#ff0000] text-white font-bold px-8 md:px-12 py-3 md:py-4 text-sm md:text-base uppercase tracking-wider transition-all duration-300"
-        >
-          BECOME AN ATTENDEE →
-        </motion.button>
+              {/* Event Details */}
+              <motion.div variants={itemVariants} className="space-y-4">
+                <div className="flex items-center gap-4 text-white">
+                  <svg className="w-6 h-6 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm text-white/70">EVENT DATE</p>
+                    <p className="font-bold text-lg">April 12, 2025</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 text-white">
+                  <svg className="w-6 h-6 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm text-white/70">LOCATION</p>
+                    <p className="font-bold text-lg">PIEAS, Islamabad</p>
+                  </div>
+                </div>
+              </motion.div>
 
-        <motion.div 
-          variants={itemVariants}
-          className="mt-16 flex flex-col items-center"
-        >
-          <p className="text-white text-sm mb-4">SCROLL DOWN</p>
+              {/* CTA Buttons */}
+              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-[#ff0000] text-white font-bold px-10 py-4 text-base uppercase tracking-widest border-2 border-[#ff0000] hover:bg-transparent hover:text-[#ff0000] transition-all duration-300"
+                >
+                  Register Now
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-transparent text-white font-bold px-10 py-4 text-base uppercase tracking-widest border-2 border-white hover:bg-white hover:text-[#222222] transition-all duration-300"
+                >
+                  Learn More
+                </motion.button>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Side - Visual Element */}
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="hidden lg:block relative"
+            >
+              {/* Large TEDx Typography */}
+              <div className="relative">
+                <div className="text-[20rem] font-black leading-none text-white/5 select-none">
+                  TEDx
+                </div>
+                
+                {/* Floating Stats */}
+                {/* Stats Grid */}
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="mt-16 lg:mt-20"
           >
-            <svg className="w-6 h-6 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+            <div className="grid grid-cols-3 gap-6">
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.7 }}
+                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
+              >
+                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">12+</p>
+                <p className="text-white text-sm uppercase tracking-wider font-bold">Speakers</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.9 }}
+                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
+              >
+                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">500+</p>
+                <p className="text-white text-sm uppercase tracking-wider font-bold">Attendees</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 2.1 }}
+                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
+              >
+                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">8</p>
+                <p className="text-white text-sm uppercase tracking-wider font-bold">Hours</p>
+              </motion.div>
+            </div>
           </motion.div>
-        </motion.div>
-      </motion.div>
+              </div>
+            </motion.div>
+
+          </div>
+
+          {/* Simple Tagline */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="mt-16 lg:mt-20"
+          >
+            <div className="flex items-center gap-4">
+              <motion.div 
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ duration: 1.5, delay: 1.8 }}
+                className="h-px bg-[#ff0000]"
+                style={{ width: "60px" }}
+              />
+              <p className="text-white text-lg md:text-xl font-bold uppercase tracking-widest">
+                Ideas Worth Spreading
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
 
       {/* About Section Preview */}
       <motion.section 
