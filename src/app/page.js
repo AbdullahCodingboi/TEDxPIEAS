@@ -1,9 +1,143 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
+
+// Past Events Carousel Component
+function PastEventsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const events = [
+    { year: "2019", title: "TEDxPIEAS 2019", theme: "Dare to Dream", attendees: "300+" },
+    { year: "2020", title: "TEDxPIEAS 2020", theme: "Beyond Boundaries", attendees: "400+" },
+    { year: "2021", title: "TEDxPIEAS 2021", theme: "Rise & Thrive", attendees: "350+" },
+    { year: "2022", title: "TEDxPIEAS 2022", theme: "New Horizons", attendees: "450+" },
+    { year: "2023", title: "TEDxPIEAS 2023", theme: "Infinite Possibilities", attendees: "500+" }
+  ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % events.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + events.length) % events.length);
+  };
+
+  return (
+    <div className="relative h-[500px] md:h-[600px]">
+      {/* Carousel Container */}
+      <div className="relative w-full h-full" style={{ perspective: '2000px' }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          {events.map((event, idx) => {
+            const position = idx - currentIndex;
+            const isActive = idx === currentIndex;
+            
+            // Calculate curved position (inverted U - center forward, sides back)
+            const angle = position * 35; // degrees
+            const radius = 600; // pixels
+            const radians = (angle * Math.PI) / 180;
+            
+            const translateX = Math.sin(radians) * radius;
+            const translateZ = Math.cos(radians) * radius - radius; // Center forward, sides back
+            const rotateY = -angle; // Rotate to face viewer
+            const scale = 1 - Math.abs(position) * 0.1;
+            
+            let zIndex = 30 - Math.abs(position) * 5; // Center card highest
+            let opacity = Math.max(1 - Math.abs(position) * 0.2, 0.4);
+            
+            const transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${Math.max(scale, 0.6)})`;
+
+            return (
+              <motion.div
+                key={idx}
+                className="absolute w-[280px] md:w-[400px] h-[400px] md:h-[500px]"
+                style={{
+                  transform,
+                  zIndex,
+                  opacity,
+                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transformStyle: 'preserve-3d'
+                }}
+              >
+                <div className={`w-full h-full bg-[#1a1a1a] border-2 ${isActive ? 'border-[#ff0000]' : 'border-[#333333]'} p-8 flex flex-col justify-between transition-all duration-300`}>
+                  {/* Year Badge */}
+                  <div className="inline-block self-start">
+                    <div className="border-2 border-white px-4 py-2">
+                      <span className="text-white text-sm font-bold tracking-widest">{event.year}</span>
+                    </div>
+                  </div>
+
+                  {/* Event Info */}
+                  <div className="space-y-4">
+                    <h3 className="text-3xl md:text-4xl font-black text-white">
+                      {event.title}
+                    </h3>
+                    <div className="w-16 h-1 bg-[#ff0000]"></div>
+                    <p className="text-xl text-white font-bold">
+                      Theme: <span className="text-[#ff0000]">{event.theme}</span>
+                    </p>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="flex gap-6">
+                    <div>
+                      <p className="text-3xl font-black text-[#ff0000]">{event.attendees}</p>
+                      <p className="text-sm text-white uppercase tracking-wider">Attendees</p>
+                    </div>
+                    <div>
+                      <p className="text-3xl font-black text-[#ff0000]">10+</p>
+                      <p className="text-sm text-white uppercase tracking-wider">Speakers</p>
+                    </div>
+                  </div>
+
+                  {/* Image Placeholder */}
+                  <div className="mt-4 h-24 bg-[#333333] border-2 border-white flex items-center justify-center">
+                    <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-[#ff0000] hover:bg-white hover:text-[#ff0000] text-white transition-all duration-300 flex items-center justify-center border-2 border-white"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-[#ff0000] hover:bg-white hover:text-[#ff0000] text-white transition-all duration-300 flex items-center justify-center border-2 border-white"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+        {events.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentIndex(idx)}
+            className={`w-3 h-3 border-2 border-white transition-all duration-300 ${
+              idx === currentIndex ? 'bg-[#ff0000]' : 'bg-transparent'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 // Particle system component
 function ParticleField() {
@@ -241,9 +375,9 @@ export default function TEDxHero() {
               {/* Main Heading */}
               <motion.div variants={itemVariants}>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] mb-6">
-                  TED<br />
-                  <span className="text-[#ff0000]">x</span><br />
-                 PIEAS
+                  AGAINST<br />
+                  <span className="text-[#ff0000]">ALL</span><br />
+                  ODDS
                 </h1>
                 <div className="w-24 h-1 bg-[#ff0000]"></div>
               </motion.div>
@@ -306,52 +440,58 @@ export default function TEDxHero() {
               transition={{ duration: 1, delay: 0.5 }}
               className="hidden lg:block relative"
             >
-              {/* Large TEDx Typography */}
+              {/* Countdown Timer */}
               <div className="relative">
-                <div className="text-[20rem] font-black leading-none text-white/5 select-none">
-                  TEDx
-                </div>
-                
-                {/* Floating Stats */}
-                {/* Stats Grid */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="mt-16 lg:mt-20"
-          >
-            <div className="grid grid-cols-3 gap-6">
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.7 }}
-                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
-              >
-                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">12+</p>
-                <p className="text-white text-sm uppercase tracking-wider font-bold">Speakers</p>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                  className="space-y-6"
+                >
+                  <p className="text-white text-sm uppercase tracking-widest mb-8">Event Countdown</p>
+                  
+                  <div className="grid grid-cols-2 gap-6">
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 1.2 }}
+                      className="bg-[#1a1a1a] border-2 border-white p-8 text-center hover:border-[#ff0000] transition-all duration-300"
+                    >
+                      <p className="text-6xl font-black text-[#ff0000] mb-2">134</p>
+                      <p className="text-sm text-white uppercase tracking-wider font-bold">Days</p>
+                    </motion.div>
 
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.9 }}
-                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
-              >
-                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">500+</p>
-                <p className="text-white text-sm uppercase tracking-wider font-bold">Attendees</p>
-              </motion.div>
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 1.3 }}
+                      className="bg-[#1a1a1a] border-2 border-white p-8 text-center hover:border-[#ff0000] transition-all duration-300"
+                    >
+                      <p className="text-6xl font-black text-white mb-2">08</p>
+                      <p className="text-sm text-white uppercase tracking-wider font-bold">Hours</p>
+                    </motion.div>
 
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 2.1 }}
-                className="border-2 border-white p-6 hover:border-[#ff0000] transition-all duration-300"
-              >
-                <p className="text-5xl md:text-6xl font-black text-[#ff0000] mb-2">8</p>
-                <p className="text-white text-sm uppercase tracking-wider font-bold">Hours</p>
-              </motion.div>
-            </div>
-          </motion.div>
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 1.4 }}
+                      className="bg-[#1a1a1a] border-2 border-white p-8 text-center hover:border-[#ff0000] transition-all duration-300"
+                    >
+                      <p className="text-6xl font-black text-white mb-2">45</p>
+                      <p className="text-sm text-white uppercase tracking-wider font-bold">Minutes</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 1.5 }}
+                      className="bg-[#1a1a1a] border-2 border-white p-8 text-center hover:border-[#ff0000] transition-all duration-300"
+                    >
+                      <p className="text-6xl font-black text-white mb-2">23</p>
+                      <p className="text-sm text-white uppercase tracking-wider font-bold">Seconds</p>
+                    </motion.div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -504,6 +644,30 @@ export default function TEDxHero() {
         </div>
       </motion.section>
 
+      {/* Past Events Carousel */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 py-20 px-6 md:px-12 bg-[#222222] overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto">
+          <motion.h2 
+            initial={{ y: -30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black text-white mb-16 text-center"
+          >
+            Past <span className="text-[#ff0000]">Events</span>
+          </motion.h2>
+
+          <div className="relative">
+            <PastEventsCarousel />
+          </div>
+        </div>
+      </motion.section>
+
       {/* Speakers Section */}
       <motion.section 
         initial={{ opacity: 0 }}
@@ -524,31 +688,38 @@ export default function TEDxHero() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {[
-              "Dr. Sarah Ahmed",
-              "Ali Hassan",
-              "Maria Khan",
-              "Omar Farooq",
-              "Fatima Malik",
-              "Usman Ali",
-              "Ayesha Butt",
-              "Hassan Raza"
-            ].map((name, idx) => (
+              { name: "Dr. Sarah Ahmed", bio: "AI researcher pioneering ethical machine learning systems" },
+              { name: "Ali Hassan", bio: "Social entrepreneur transforming education in rural communities" },
+              { name: "Maria Khan", bio: "Climate activist leading sustainable urban development" },
+              { name: "Omar Farooq", bio: "Tech innovator building accessible healthcare solutions" },
+              { name: "Fatima Malik", bio: "Artist exploring digital and traditional mediums" },
+              { name: "Usman Ali", bio: "Neuroscientist researching cognitive enhancement" },
+              { name: "Ayesha Butt", bio: "Award-winning documentary filmmaker" },
+              { name: "Hassan Raza", bio: "Startup founder revolutionizing fintech" }
+            ].map((speaker, idx) => (
               <motion.div
                 key={idx}
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="group flex flex-col items-center"
+                className="group flex flex-col items-center relative overflow-visible"
               >
-                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#333333] border-2 border-white group-hover:border-[#ff0000] transition-all duration-300 mb-4 flex items-center justify-center">
-                  <svg className="w-16 h-16 md:w-20 md:h-20 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#333333] border-2 border-white group-hover:border-[#ff0000] transition-all duration-300 mb-4 flex items-center justify-center relative overflow-hidden">
+                  <svg className="w-16 h-16 md:w-20 md:h-20 text-white relative  transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                   </svg>
+                  
+                  {/* Drawer that slides from bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-full bg-[#ff0000] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex items-center justify-center p-4 border-2 border-white">
+                    <p className="text-white text-xs md:text-sm font-bold text-center leading-tight">
+                      {speaker.bio}
+                    </p>
+                  </div>
                 </div>
+                
                 <h3 className="text-white font-bold text-center group-hover:text-[#ff0000] transition-colors">
-                  {name}
+                  {speaker.name}
                 </h3>
                 <p className="text-white text-sm text-center mt-1">Speaker</p>
               </motion.div>
