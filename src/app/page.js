@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState,useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
-
+import { ThreeDImageRing } from "@/components/lightswind/3d-image-ring";
 // Past Events Carousel Component
+ 
 function PastEventsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
@@ -262,6 +263,18 @@ function Scene() {
 }
 
 export default function TEDxHero() {
+  const imageUrls = [
+    "https://images.pexels.com/photos/1704120/pexels-photo-1704120.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/2449540/pexels-photo-2449540.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  ];
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -299,6 +312,7 @@ export default function TEDxHero() {
     }
   };
 
+     
   return (
     <div className="relative min-h-screen bg-[#222222] overflow-hidden">
       {/* 3D Background */}
@@ -375,9 +389,9 @@ export default function TEDxHero() {
               {/* Main Heading */}
               <motion.div variants={itemVariants}>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] mb-6">
-                  AGAINST<br />
-                  <span className="text-[#ff0000]">ALL</span><br />
-                  ODDS
+                  PIEAS<br />
+                  <span className="text-[#ff0000]">X</span><br />
+                  TED
                 </h1>
                 <div className="w-24 h-1 bg-[#ff0000]"></div>
               </motion.div>
@@ -650,7 +664,7 @@ export default function TEDxHero() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="relative z-10 py-20 px-6 md:px-12 bg-[#222222] overflow-hidden"
+        className="relative z-10 py-10 px-6 md:px-12 bg-[#222222] overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
           <motion.h2 
@@ -662,9 +676,11 @@ export default function TEDxHero() {
             Past <span className="text-[#ff0000]">Events</span>
           </motion.h2>
 
-          <div className="relative">
-            <PastEventsCarousel />
-          </div>
+<div className="h-[400px] md:h-[480px] flex items-center justify-center">
+  <ThreeDImageRing images={imageUrls} />
+</div>
+
+
         </div>
       </motion.section>
 
