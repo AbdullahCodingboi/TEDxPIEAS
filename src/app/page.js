@@ -676,20 +676,9 @@ export default function TEDxHero() {
             Past <span className="text-[#ff0000]">Events</span>
           </motion.h2>
 
-<div className="
-  flex items-center justify-center
-  h-[400px] md:h-[480px]
-  w-full sm:w-[90vw] sm:aspect-square
-">
-  <ThreeDImageRing
-    images={imageUrls}
-    imageDistance={700}
-    perspective={2500}
-    className="sm:scale-[1.1]"
-  />
+<div className="h-[520px] md:h-[480px] flex items-center justify-center">
+  <ThreeDImageRing images={imageUrls} imageDistance={600} perspective={2500} />
 </div>
-
-
 
 
         </div>
