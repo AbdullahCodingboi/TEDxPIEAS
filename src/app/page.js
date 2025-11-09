@@ -389,9 +389,9 @@ export default function TEDxHero() {
               {/* Main Heading */}
               <motion.div variants={itemVariants}>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] mb-6">
-                  PIEAS<br />
+                  TED<br />
                   <span className="text-[#ff0000]">X</span><br />
-                  TED
+                 PIEAS
                 </h1>
                 <div className="w-24 h-1 bg-[#ff0000]"></div>
               </motion.div>
@@ -676,9 +676,19 @@ export default function TEDxHero() {
             Past <span className="text-[#ff0000]">Events</span>
           </motion.h2>
 
-<div className="h-[400px] md:h-[480px] flex items-center justify-center">
-  <ThreeDImageRing images={imageUrls} />
+<div className="
+  flex items-center justify-center
+  h-[400px] md:h-[480px]
+  sm:w-[90vw] sm:aspect-square
+">
+  <ThreeDImageRing
+    images={imageUrls}
+    imageDistance={700}
+    perspective={2500}
+    className="sm:scale-[1.1]"
+  />
 </div>
+
 
 
         </div>
