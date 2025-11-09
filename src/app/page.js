@@ -679,7 +679,7 @@ export default function TEDxHero() {
 <div className="
   flex items-center justify-center
   h-[400px] md:h-[480px]
-  sm:w-[90vw] sm:aspect-square
+  w-full sm:w-[90vw] sm:aspect-square
 ">
   <ThreeDImageRing
     images={imageUrls}
@@ -688,6 +688,7 @@ export default function TEDxHero() {
     className="sm:scale-[1.1]"
   />
 </div>
+
 
 
 
