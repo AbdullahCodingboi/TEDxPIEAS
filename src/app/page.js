@@ -884,9 +884,9 @@ export default function TEDxHero() {
 
 <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
-    { name: "Mohib Ullah", role: "Director", image: "/Tedx Directors/Mohib Ullah .jpg" },
+    { name: "Mohib Ullah", role: "Director Finance", image: "/Tedx Directors/Mohib Ullah .jpg" },
     { name: "Taha Zafar", role: "Director Management", image: "/Tedx Directors/tahazaffar.jpg" },
-    { name: "Salman Mansoor", role: "Director", image: "/Tedx Directors/Salman Mansoor (2).png" }
+    { name: "Salman Mansoor", role: "Director Registration", image: "/Tedx Directors/Salman Mansoor (2).png" }
   ].map((person, idx) => (
     <motion.div
       key={idx}
@@ -985,7 +985,7 @@ export default function TEDxHero() {
               ))}
             </div>
             {/* Bottom Row 2- 6 people */}
-   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
+   <div className="grid justify-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
   {[
     { name: "Muhammad Ali", role: "Head Back Stage", image: "/Tedx Heads/Muhammad Ali _ Head Back Stage_.jpg"  },
     { name: "Zohaib Cheema", role: "Head Mess", image: "/Tedx Heads/Zohaib Cheema_Head Mess.jpg" },
