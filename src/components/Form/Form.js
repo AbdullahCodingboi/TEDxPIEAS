@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import axios from 'axios';
 export default function TEDxRegistrationModal({ isOpen = false, onClose = () => {} }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -10,12 +10,14 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
     cnic: '',
     phone: '',
     cnicFront: null,
-    cnicBack: null
+    cnicBack: null,
+    universityCard: null
   });
   const [errors, setErrors] = useState({});
   const [previewUrls, setPreviewUrls] = useState({
     front: null,
-    back: null
+    back: null,
+    university: null
   });
 
   useEffect(() => {
@@ -37,7 +39,8 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
         cnic: '',
         phone: '',
         cnicFront: null,
-        cnicBack: null
+        cnicBack: null,
+        universityCard: null
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,17 +62,25 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
   };
 
   const handleFileChange = (e, side) => {
-    const file = e.target.files[0];
-    if (file) {
-      const fieldName = side === 'front' ? 'cnicFront' : 'cnicBack';
-      setFormData(prev => ({ ...prev, [fieldName]: file }));
-      
-      // Create preview URL
-      const url = URL.createObjectURL(file);
-      // revoke previous if exists
-      if (previewUrls[side]) URL.revokeObjectURL(previewUrls[side]);
-      setPreviewUrls(prev => ({ ...prev, [side]: url }));
-    }
+    const file = e.target.files?.[0] ?? null;
+    if (!file) return;
+
+    let fieldName = 'cnicFront';
+    if (side === 'back') fieldName = 'cnicBack';
+    if (side === 'university') fieldName = 'universityCard';
+
+    setFormData(prev => ({ ...prev, [fieldName]: file }));
+
+    // Create preview URL for images (ignore if pdf)
+    const isImage = file.type.startsWith('image/');
+    const url = isImage ? URL.createObjectURL(file) : null;
+
+    // revoke previous if exists
+    if (previewUrls[side]) URL.revokeObjectURL(previewUrls[side]);
+    setPreviewUrls(prev => ({ ...prev, [side]: url }));
+
+    // clear any file-related error
+    setErrors(prev => ({ ...prev, [fieldName]: undefined, [`${side}`]: undefined }));
   };
 
   const nextStep = () => {
@@ -97,11 +108,14 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = () => {
-    // final validation (ensure CNIC images uploaded)
+  const handleSubmit = async () => {
+    console.log('handleSubmit called', { currentStep, formData });
+
+    // final validation (ensure required files uploaded)
     const newErrors = {};
     if (!formData.cnicFront) newErrors.cnicFront = 'CNIC front image is required';
     if (!formData.cnicBack) newErrors.cnicBack = 'CNIC back image is required';
+    if (!formData.universityCard) newErrors.universityCard = 'University card image is required';
 
     // also ensure no pending errors from step1
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
@@ -112,26 +126,71 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
-      // jump to first step if missing basic info
       if (newErrors.fullName || newErrors.university || newErrors.email || newErrors.cnic || newErrors.phone) {
         setCurrentStep(1);
       } else {
         setCurrentStep(2);
       }
+      console.log('Validation failed, aborting submit', newErrors);
       return;
     }
 
-    console.log('Form submitted:', formData);
-    alert('Registration submitted successfully!');
-    // clean up preview URLs
-    if (previewUrls.front) {
-      URL.revokeObjectURL(previewUrls.front);
+    try {
+      const payload = new FormData();
+      payload.append('name', formData.fullName);
+      payload.append('email', formData.email);
+      payload.append('phone', formData.phone);
+      payload.append('cnic', formData.cnic);
+      payload.append('university', formData.university);
+      // backend expects 'university_card_picture' as file field
+      if (formData.universityCard) payload.append('university_card_picture', formData.universityCard);
+      // include CNIC images as additional fields (optional)
+      if (formData.cnicFront) payload.append('cnic_front', formData.cnicFront);
+      if (formData.cnicBack) payload.append('cnic_back', formData.cnicBack);
+
+      // debug: list formdata entries in console (files will show as File objects)
+      for (const pair of payload.entries()) {
+        console.log('formdata:', pair[0], pair[1]);
+      }
+
+      // DO NOT set Content-Type manually so browser/axios can set boundary
+      const res = await axios.post('http://127.0.0.1:5000/register', payload, {
+        timeout: 20000
+      });
+
+      console.log('register response', res);
+
+      // success handling
+      if (res?.data) {
+        alert(res.data.message || 'Registration successful!');
+      } else {
+        alert('Registration submitted successfully!');
+      }
+
+      // cleanup previews & form
+      if (previewUrls.front) URL.revokeObjectURL(previewUrls.front);
+      if (previewUrls.back) URL.revokeObjectURL(previewUrls.back);
+      if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
+      setPreviewUrls({ front: null, back: null, university: null });
+      setFormData({
+        fullName: '',
+        university: '',
+        email: '',
+        cnic: '',
+        phone: '',
+        cnicFront: null,
+        cnicBack: null,
+        universityCard: null
+      });
+      onClose?.();
+    } catch (err) {
+      console.error('Registration error:', err);
+      if (err.response?.data?.message) {
+        alert(`Error: ${err.response.data.message}`);
+      } else {
+        alert('Failed to submit registration. Check your network or backend.');
+      }
     }
-    if (previewUrls.back) {
-      URL.revokeObjectURL(previewUrls.back);
-    }
-    setPreviewUrls({ front: null, back: null });
-    onClose?.();
   };
 
   const overlayVariants = {
