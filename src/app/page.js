@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { ThreeDImageRing } from "@/components/lightswind/3d-image-ring";
 import Link from "next/link";
-
+import { ThreeDMarquee, MarqueeImage } from "@/components/lightswind/3d-marquee"
 import  TEDxRegistrationModal  from '@/components/Form/Form';
 // Past Events Carousel Component
  
@@ -151,7 +151,15 @@ export default function TEDxHero() {
   "/eventHighlights/23.jpg"
 ];
 
-
+const clickableImages = [
+  {
+    src: "/path/to/image1.jpg",
+    alt: "Portfolio Item 1",
+    href: "https://example.com/project1",
+    target: "_blank"
+  }
+];
+ 
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -620,6 +628,7 @@ export default function TEDxHero() {
     </div>
   </div>
 </motion.section>
+
       {/* Past Events Carousel */}
       <motion.section 
         initial={{ opacity: 0 }}
@@ -727,7 +736,7 @@ export default function TEDxHero() {
             
      
   {/* Organizers Section */}
-      <motion.section 
+   <motion.section 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -757,7 +766,7 @@ export default function TEDxHero() {
           {/* Pyramid Layout */}
           <div className="flex flex-col items-center gap-8">
             {/* top */}
-          <div className="flex justify-center sm:w-full">
+          <div className="flex justify-center w-full">
   {[
    { name: "Mohammed Amir", role: "President", image: "/Tedx OBs/MohammadAmir_President.jpg" },
   ].map((person, idx) => (
@@ -786,37 +795,7 @@ export default function TEDxHero() {
     </motion.div>
   ))}
 </div>
-    {/* Top Row -  people */}
-          <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
-  {[
-    { name: "Hammad Tariq", role: "MME", image: "/DRs/Hammad Tariq, Mme_.jpg" },
-    { name: "Shahbaz Ahmed Shah", role: "DEE", image: "/DRs/Shahbaz_Ahmed_Shah_DEE_DR.png" },
-  ].map((person, idx) => (
-    <motion.div
-      key={idx}
-      initial={{ y: 50, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: idx * 0.1 }}
-      whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
-    >
-      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
-        <img
-          src={person.image}
-          alt={person.name}
-          className="w-full h-full object-cover block"
-        />
-      </div>
-      <div className="text-center">
-        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
-          {person.name}
-        </h3>
-        <p className="text-white text-sm">{person.role}</p>
-      </div>
-    </motion.div>
-  ))}
-</div>
+
             {/* Top Row - 3 people */}
           <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
@@ -831,7 +810,7 @@ export default function TEDxHero() {
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
     >
       <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
         <img
@@ -863,7 +842,7 @@ export default function TEDxHero() {
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
     >
       <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
         <img
@@ -895,7 +874,7 @@ export default function TEDxHero() {
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
     >
       <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
         <img
@@ -913,15 +892,44 @@ export default function TEDxHero() {
     </motion.div>
   ))}
 </div>
-
-            {/* Middle Row - 4 people */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full max-w-6xl">
+<div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
+  {[
+    { name: "Hammad Tariq", role: "Representative MME", image: "/DRs/Hammad Tariq, Mme_.jpg" },
+    { name: "Shahbaz Ahmed Shah", role: "Representative DEE", image: "/DRs/Shahbaz_Ahmed_Shah_DEE_DR.png" },
+  ].map((person, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
+    >
+      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+        <img
+          src={person.image}
+          alt={person.name}
+          className="w-full h-full object-cover block"
+        />
+      </div>
+      <div className="text-center">
+        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
+          {person.name}
+        </h3>
+        <p className="text-white text-sm">{person.role}</p>
+      </div>
+    </motion.div>
+  ))}
+</div>
+            {/* Middle Row - 5 people */}
+            <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
               {[
                 { name: "Fajar Saleem", role: "Head Web Dev", image: "/Tedx Heads/FajarSaleem_Head Webdev.jpg" },
                 { name: "Syed Tahir Ali", role: "Head Transport", image: "/Tedx Heads/Syed Tahir Ali _Head Transport.png" },
                 { name: "Rida Aziz", role: "Head Liaison", image: "/Tedx Heads/Rida Aziz_headliaison.jpg" },
-                { name: "Momna Tul Jannat", role: "Head Task Force", image: "/Tedx Heads/Momna tul jannat_head_task force.jpg" }
-               ,{ name: "Faseeh Hassan", role: "Head Decor", image: "/Tedx Heads/FaseehHassan_HeadDecor.jpg" }
+                { name: "Momna Tul Jannat", role: "Head Task Force", image: "/Tedx Heads/Momna tul jannat_head_task force.jpg" },
+                { name: "Faseeh Hassan", role: "Head Decor", image: "/Tedx Heads/FaseehHassan_HeadDecor.jpg" }
 
               ].map((person, idx) => (
                 <motion.div
@@ -931,7 +939,7 @@ export default function TEDxHero() {
                   viewport={{ once: true }}
                   transition={{ delay: (idx + 2) * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 flex flex-col sm:flex-row items-center gap-4 min-h-[140px]"
+                  className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] lg:w-[calc(20%-19.2px)]"
                 >
                   <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
                      <img
@@ -940,7 +948,7 @@ export default function TEDxHero() {
                      className="w-full h-full object-cover block"
                    />
                   </div>
-                  <div className="text-center sm:text-left flex-1">
+                  <div className="text-center flex-1">
                     <h3 className="text-white font-bold text-base sm:text-lg mb-1 group-hover:text-[#ff0000] transition-colors">
                       {person.name}
                     </h3>
@@ -950,14 +958,14 @@ export default function TEDxHero() {
               ))}
             </div>
 
-            {/* Bottom Row - 5 people */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 w-full">
+            {/* Row 5 - 5 people */}
+            <div className="flex flex-wrap justify-center gap-5 w-full max-w-6xl">
               {[
                 { name: "Muhammad Talha Sadiq", role: "Head Social Media", image: "/Tedx Heads/Muhammad Talha Sadiq _ Head social Media.jpg"  },
                 { name: "Taha Mumtaz", role: "Head Security", image: "/Tedx Heads/Taha Mumtaz _ Head Security.jpg" },
                 { name: "Mohsan Ali Javed", role: "Head Purchase", image: "/Tedx Heads/Mohsan Ali Javed_Head Purchase .jpg" },
                 { name: "Tuba Zareef", role: "Head Documentation", image: "/Tedx Heads/TubaZareef_Headdocumentation.jpg" },
-               { name: "Azm ul haq", role: "Head Sponsorship", image: "/Tedx Heads/IMG-20250620-WA0001.jpg" }
+                { name: "Azm ul haq", role: "Head Sponsorship", image: "/Tedx Heads/IMG-20250620-WA0001.jpg" }
               ].map((person, idx) => (
                 <motion.div
                   key={idx}
@@ -966,7 +974,7 @@ export default function TEDxHero() {
                   viewport={{ once: true }}
                   transition={{ delay: (idx + 6) * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-3 sm:p-4 flex flex-col sm:flex-row items-center gap-3 min-h-[130px]"
+                  className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-3 sm:p-4 flex flex-col items-center gap-3 min-h-[130px] w-[calc(33.333%-14px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)]"
                 >
                   <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
                      <img
@@ -975,7 +983,7 @@ export default function TEDxHero() {
                      className="w-full h-full object-cover block"
                    />
                   </div>
-                  <div className="text-center sm:text-left flex-1">
+                  <div className="text-center flex-1">
                     <h3 className="text-white font-bold text-sm sm:text-base mb-1 group-hover:text-[#ff0000] transition-colors">
                       {person.name}
                     </h3>
@@ -984,8 +992,9 @@ export default function TEDxHero() {
                 </motion.div>
               ))}
             </div>
-            {/* Bottom Row 2- 6 people */}
-   <div className="grid justify-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
+
+            {/* Row 6 - 6 people */}
+           <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
     { name: "Muhammad Ali", role: "Head Back Stage", image: "/Tedx Heads/Muhammad Ali _ Head Back Stage_.jpg"  },
     { name: "Zohaib Cheema", role: "Head Mess", image: "/Tedx Heads/Zohaib Cheema_Head Mess.jpg" },
@@ -1001,9 +1010,9 @@ export default function TEDxHero() {
       viewport={{ once: true }}
       transition={{ delay: (idx + 6) * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 min-h-[140px]"
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-5 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] lg:w-[calc(20%-19.2px)]"
     >
-      <div className="w-22 h-22 sm:w-26 sm:h-26 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
         <img
           src={person.image}
           alt={person.name}
@@ -1011,11 +1020,11 @@ export default function TEDxHero() {
         />
       </div>
 
-      <div className="text-center sm:text-left flex-1 min-w-0">
-        <h3 className="text-white font-bold text-[11px] sm:text-xs mb-1 group-hover:text-[#ff0000] transition-colors break-words overflow-hidden">
+      <div className="text-center flex-1 min-w-0">
+        <h3 className="text-white font-bold text-sm sm:text-base mb-1 group-hover:text-[#ff0000] transition-colors break-words overflow-hidden">
           {person.name}
         </h3>
-        <p className="text-white text-[9px] sm:text-[11px] leading-tight break-words overflow-hidden">
+        <p className="text-white text-xs sm:text-sm leading-tight break-words overflow-hidden">
           {person.role}
         </p>
       </div>
