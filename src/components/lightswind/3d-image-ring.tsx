@@ -253,7 +253,7 @@ const handleDragEnd = () => {
                   rotateY: index * -angle,
                   z: -imageDistance * currentScale,
                   transformOrigin: `50% 50% ${imageDistance * currentScale}px`,
-                  backgroundPosition: getBgPos(index, currentRotationY.current, currentScale),
+                  backgroundPosition: 'center center',
                 }}
                 initial="hidden"
                 animate="visible"
