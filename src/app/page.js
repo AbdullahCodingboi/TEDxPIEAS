@@ -881,6 +881,39 @@ export default function TEDxHero() {
     </motion.div>
   ))}
 </div>
+
+<div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
+  {[
+    { name: "Mohib Ullah", role: "Director", image: "/Tedx Directors/Mohib Ullah .jpg" },
+    { name: "Taha Zafar", role: "Director Management", image: "/Tedx Directors/tahazaffar.jpg" },
+    { name: "Salman Mansoor", role: "Director", image: "/Tedx Directors/Salman Mansoor (2).png" }
+  ].map((person, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
+    >
+      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+        <img
+          src={person.image}
+          alt={person.name}
+          className="w-full h-full object-cover block"
+        />
+      </div>
+      <div className="text-center">
+        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
+          {person.name}
+        </h3>
+        <p className="text-white text-sm">{person.role}</p>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
             {/* Middle Row - 4 people */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full max-w-6xl">
               {[
@@ -951,40 +984,45 @@ export default function TEDxHero() {
                 </motion.div>
               ))}
             </div>
-            {/* Bottom Row 2- 5 people */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 w-full">
-              {[
-                { name: "Muhammad Ali", role: "Head Back Stage", image: "/Tedx Heads/Muhammad Ali _ Head Back Stage_.jpg"  },
-                { name: "Zohaib Cheema", role: "Head Mess", image: "/Tedx Heads/Zohaib Cheema_Head Mess.jpg" },
-                { name: "Hassam Zahid ", role: "Head Outreach", image: "/Tedx Heads/Hassam Zahid _ Head OutReach.jpg" },
-                { name: "Sana Shahzad", role: "Head Registration", image: "/Tedx Heads/Head Registration .jpg" },
-                { name: "Ali Ammar Wahla", role: "Head operations", image: "/Tedx Heads/Ali Ammar Wahla- Head operations.jpg" }
-              ].map((person, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (idx + 6) * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-3 sm:p-4 flex flex-col sm:flex-row items-center gap-3 min-h-[130px]"
-                >
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
-                     <img
-                     src={person.image}
-                     alt={person.name}
-                     className="w-full h-full object-cover block"
-                   />
-                  </div>
-                  <div className="text-center sm:text-left flex-1">
-                    <h3 className="text-white font-bold text-sm sm:text-base mb-1 group-hover:text-[#ff0000] transition-colors">
-                      {person.name}
-                    </h3>
-                    <p className="text-white text-xs">{person.role}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Bottom Row 2- 6 people */}
+   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
+  {[
+    { name: "Muhammad Ali", role: "Head Back Stage", image: "/Tedx Heads/Muhammad Ali _ Head Back Stage_.jpg"  },
+    { name: "Zohaib Cheema", role: "Head Mess", image: "/Tedx Heads/Zohaib Cheema_Head Mess.jpg" },
+    { name: "Hassam Zahid ", role: "Head Outreach", image: "/Tedx Heads/Hassam Zahid _ Head OutReach.jpg" },
+    { name: "Sana Shahzad", role: "Head Registration", image: "/Tedx Heads/Head Registration .jpg" },
+    { name: "Ali Ammar Wahla", role: "Head operations", image: "/Tedx Heads/Ali Ammar Wahla- Head operations.jpg" },
+    { name: "Umer Farooq", role: "Head Finance", image: "/Tedx Heads/umer farooq.jpg" }
+  ].map((person, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: (idx + 6) * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 min-h-[140px]"
+    >
+      <div className="w-22 h-22 sm:w-26 sm:h-26 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+        <img
+          src={person.image}
+          alt={person.name}
+          className="w-full h-full object-cover block"
+        />
+      </div>
+
+      <div className="text-center sm:text-left flex-1 min-w-0">
+        <h3 className="text-white font-bold text-[11px] sm:text-xs mb-1 group-hover:text-[#ff0000] transition-colors break-words overflow-hidden">
+          {person.name}
+        </h3>
+        <p className="text-white text-[9px] sm:text-[11px] leading-tight break-words overflow-hidden">
+          {person.role}
+        </p>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
           </div>
         </div>
       </motion.section>
