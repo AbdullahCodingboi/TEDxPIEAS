@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ThreeDMarquee, MarqueeImage } from "@/components/lightswind/3d-marquee"
 import  TEDxRegistrationModal  from '@/components/Form/Form';
 // Past Events Carousel Component
- 
+ import InstrumentalPerformance from '@/components/Misc/MusicAndArt';
 // function PastEventsCarousel() {
 
 // Particle system component
@@ -581,7 +581,7 @@ const clickableImages = [
   {
     title: "Taleem ki Taaqat (The Might of Education)",
     speaker: "Master Ayub Khan",
-    videoId: "6tmUxCS8FVA"
+    videoId: "ba9-gihhcK8"
   },
   {
     title: "The Importance of Listicles",
@@ -647,18 +647,33 @@ const clickableImages = [
           >
             Past <span className="text-[#ff0000]">Events</span>
           </motion.h2>
-<div className="h-[480px] flex items-center justify-center">
-  <ThreeDImageRing 
-    images={imageUrls} 
-    imageDistance={600} 
-    perspective={2000}
-    width={300}
-    id="speakers"
-    imageClassName="!bg-center"
-  />
-</div>
+
         </div>
       </motion.section>
+ 
+<div className="h-[480px] px-0 mx-0 sm:h-[480px]  flex items-center justify-center w-full">
+ <ThreeDImageRing 
+   images={imageUrls} 
+   imageDistance={600} 
+   perspective={2000}
+ width={300}
+   id="speakers"
+   imageClassName="!bg-center"
+ />
+</div>
+{/* Responsive 3D ring — full width on small devices, constrained on large */}
+<div className="w-full px-0 mx-0 h-[320px] sm:h-[480px] flex items-center justify-center">
+ <div className="w-full max-w-4xl lg:max-w-none">
+   <ThreeDImageRing
+     images={imageUrls}
+    imageDistance={600}
+     perspective={2000}
+     id="speakers"
+    className="w-full h-full"
+     imageClassName="!bg-center"
+    />
+  </div>
+</div>
 
       {/* Speakers Section */}
       <motion.section 
@@ -733,7 +748,7 @@ const clickableImages = [
           </div>
         </div>
       </motion.section>
-            
+           
      
   {/* Organizers Section */}
    <motion.section 
@@ -1035,7 +1050,7 @@ const clickableImages = [
           </div>
         </div>
       </motion.section>
-
+<InstrumentalPerformance /> 
       {/* Footer */}
        <footer className="relative z-10 bg-[#1a1a1a] border-t-2 border-[#333333] py-12 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
