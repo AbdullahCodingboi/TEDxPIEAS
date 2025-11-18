@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+
 export default function TEDxRegistrationModal({ isOpen = false, onClose = () => {} }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -11,31 +11,28 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
     phone: '',
     cnicFront: null,
     cnicBack: null,
-    universityCard: null
   });
   const [errors, setErrors] = useState({});
   const [previewUrls, setPreviewUrls] = useState({
     front: null,
     back: null,
-    university: null
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Replace these with your actual values
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3epxDIT2W1BsP1lb_i39SlQoxTtOs-AvgfyPDTtkcSyD-U0Z9oFlHmECAHAyoLp0/exec';
 
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(1);
     } else {
-      // when modal closes, clear previews & files to avoid leaking objectURLs
       if (previewUrls.front) {
         URL.revokeObjectURL(previewUrls.front);
       }
       if (previewUrls.back) {
         URL.revokeObjectURL(previewUrls.back);
       }
-      // keep university key as well to avoid losing that state
-      if (previewUrls.university) {
-        URL.revokeObjectURL(previewUrls.university);
-      }
-      setPreviewUrls({ front: null, back: null, university: null });
+      setPreviewUrls({ front: null, back: null });
       setFormData({
         fullName: '',
         university: '',
@@ -44,25 +41,20 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
         phone: '',
         cnicFront: null,
         cnicBack: null,
-        universityCard: null
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   useEffect(() => {
     return () => {
-      // cleanup on unmount
       if (previewUrls.front) URL.revokeObjectURL(previewUrls.front);
       if (previewUrls.back) URL.revokeObjectURL(previewUrls.back);
-      if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
     };
-  }, [previewUrls.front, previewUrls.back, previewUrls.university]);
+  }, [previewUrls.front, previewUrls.back]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // clear error on change
     setErrors(prev => ({ ...prev, [name]: undefined }));
   };
 
@@ -72,31 +64,35 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
 
     let fieldName = 'cnicFront';
     if (side === 'back') fieldName = 'cnicBack';
-    if (side === 'university') fieldName = 'universityCard';
 
     setFormData(prev => ({ ...prev, [fieldName]: file }));
 
-    // Create preview URL for images (ignore if pdf)
     const isImage = file.type.startsWith('image/');
     const url = isImage ? URL.createObjectURL(file) : null;
 
-    // revoke previous if exists
     if (previewUrls[side]) URL.revokeObjectURL(previewUrls[side]);
     setPreviewUrls(prev => ({ ...prev, [side]: url }));
 
-    // clear any file-related error
     setErrors(prev => ({ ...prev, [fieldName]: undefined, [`${side}`]: undefined }));
   };
 
+  // Convert file to base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  };
+
   const nextStep = () => {
-    // validate step 1 required fields
     if (currentStep === 1) {
       const newErrors = {};
       if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
       if (!formData.university.trim()) newErrors.university = 'University / Institute is required';
       if (!formData.email.trim()) newErrors.email = 'Email is required';
       else {
-        // basic email check
         const re = /\S+@\S+\.\S+/;
         if (!re.test(formData.email)) newErrors.email = 'Enter a valid email';
       }
@@ -116,13 +112,10 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
   const handleSubmit = async () => {
     console.log('handleSubmit called', { currentStep, formData });
 
-    // final validation (ensure required files uploaded)
     const newErrors = {};
     if (!formData.cnicFront) newErrors.cnicFront = 'CNIC front image is required';
     if (!formData.cnicBack) newErrors.cnicBack = 'CNIC back image is required';
-    if (!formData.universityCard) newErrors.universityCard = 'University card image is required';
 
-    // also ensure no pending errors from step1
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
     if (!formData.university.trim()) newErrors.university = 'University / Institute is required';
     if (!formData.email.trim()) newErrors.email = 'Email is required';
@@ -140,56 +133,47 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      const payload = new FormData();
-      // Use server-expected, case-sensitive field names
-      payload.append('Name', formData.fullName || '');
-      payload.append('University', formData.university || '');
-      payload.append('Email', formData.email || '');
-      payload.append('CNIC', formData.cnic || '');
-      // backend expects ContactNumber (use exact key)
-      payload.append('ContactNumber', formData.phone || '');
+      // Convert files to base64
+      const cnicFrontBase64 = formData.cnicFront ? await fileToBase64(formData.cnicFront) : '';
+      const cnicBackBase64 = formData.cnicBack ? await fileToBase64(formData.cnicBack) : '';
 
-      // Files with server-expected keys
-      if (formData.cnicFront) payload.append('CNIC_Front_Image', formData.cnicFront);
-      if (formData.cnicBack) payload.append('CNIC_Back_Image', formData.cnicBack);
-      // Optional extra file (keep if backend uses it)
-      if (formData.universityCard) payload.append('university_card_picture', formData.universityCard);
-      // Do NOT append 'Postal Address' — it was causing server to read unexpected values
+      // Prepare data for Google Sheets
+      const payload = {
+        fullName: formData.fullName,
+        university: formData.university,
+        email: formData.email,
+        cnic: formData.cnic,
+        phone: formData.phone,
+        cnicFront: cnicFrontBase64,
+        cnicBack: cnicBackBase64,
+        cnicFrontName: formData.cnicFront?.name || '',
+        cnicBackName: formData.cnicBack?.name || '',
+        timestamp: new Date().toISOString()
+      };
 
-     // Debug: show axios defaults/headers
-    console.log('axios default headers', axios.defaults.headers);
-
-      // debug: list formdata entries in console (files will show as File objects)
-      for (const pair of payload.entries()) {
-        console.log('formdata:', pair[0], pair[1]);
-      }
-
-      // Use fetch for FormData upload (browser will set correct multipart boundary)
-      console.log('sending with fetch...');
-      const response = await fetch('http://127.0.0.1:5000/register', {
+      console.log('Sending to Google Sheets...');
+      
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        body: payload,
-        // do not set Content-Type here
+        mode: 'no-cors', // Google Apps Script requires this
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
       });
-      console.log('fetch response', response);
 
-      // Always show a single "Submitted" message.
-      // Close modal only when server returned HTTP 200.
-      if (response.status === 200) {
-        try { onClose?.(); } catch (e) { /* ignore */ }
-      }
-      // show generic confirmation regardless of response.ok (no "failed" alerts)
-      alert('Submitted');
+      console.log('Response received');
 
-      // attempt to read response body but ignore errors
-      const data = await response.json().catch(() => null);
+      // With no-cors mode, we can't read the response, so we assume success
+      alert('Registration submitted successfully!');
 
-      // cleanup previews & form
+      // Cleanup
       if (previewUrls.front) URL.revokeObjectURL(previewUrls.front);
       if (previewUrls.back) URL.revokeObjectURL(previewUrls.back);
-      if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
-      setPreviewUrls({ front: null, back: null, university: null });
+      setPreviewUrls({ front: null, back: null });
       setFormData({
         fullName: '',
         university: '',
@@ -198,13 +182,14 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
         phone: '',
         cnicFront: null,
         cnicBack: null,
-        universityCard: null
       });
       onClose?.();
     } catch (err) {
       console.error('Registration error:', err);
-      // Always show success message and close modal on error as requested
-      try { onClose?.(); alert("Success")} catch (e) { /* ignore */ }
+      alert('Registration submitted!');
+      onClose?.();
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -255,7 +240,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               variants={overlayVariants}
               initial="hidden"
@@ -265,7 +249,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
               className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
             />
 
-            {/* Modal Content */}
             <motion.div
               variants={modalVariants}
               initial="hidden"
@@ -273,7 +256,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
               exit="exit"
               className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl max-h-[90vh] bg-[#1a1a1a] border-4 border-[#ff0000] z-50 overflow-hidden flex flex-col"
             >
-              {/* Header */}
               <div className="bg-[#222222] border-b-2 border-[#ff0000] p-4 md:p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -292,7 +274,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                   </button>
                 </div>
 
-                {/* Progress Bar */}
                 <div className="w-full h-2 bg-[#333333] overflow-hidden">
                   <motion.div
                     variants={progressVariants}
@@ -307,10 +288,8 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                 </div>
               </div>
 
-              {/* Form Content */}
               <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
                 <AnimatePresence mode="wait">
-                  {/* Step 1: Basic Information */}
                   {currentStep === 1 && (
                     <motion.div
                       key="step1"
@@ -406,7 +385,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                     </motion.div>
                   )}
 
-                  {/* Step 2: CNIC Upload */}
                   {currentStep === 2 && (
                     <motion.div
                       key="step2"
@@ -415,61 +393,6 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                       exit={{ opacity: 0, x: -50 }}
                       className="space-y-6"
                     >
-                      {/* University card upload (backend expects 'university_card_picture') */}
-                      <div>
-                        <label className="block text-white font-bold mb-3 text-sm md:text-base">
-                          University Card / ID <span className="text-[#ff0000]">*</span>
-                        </label>
-                        <div className="border-2 border-dashed border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-6 text-center bg-[#222222]">
-                          {previewUrls.university ? (
-                            <div className="space-y-3">
-                              <img
-                                src={previewUrls.university}
-                                alt="University Card"
-                                className="max-h-48 mx-auto border-2 border-[#ff0000]"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setFormData(prev => ({ ...prev, universityCard: null }));
-                                  if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
-                                  setPreviewUrls(prev => ({ ...prev, university: null }));
-                                }}
-                                className="text-[#ff0000] hover:text-white transition-colors text-sm"
-                              >
-                                Remove File
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              <svg className="w-12 h-12 mx-auto mb-3 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                              </svg>
-                              <p className="text-white mb-2">Click to upload University Card</p>
-                              <p className="text-white/50 text-xs">JPG, PNG or PDF (Max 5MB)</p>
-                            </>
-                          )}
-                          <input
-                            type="file"
-                            accept="image/*,.pdf"
-                            onChange={(e) => handleFileChange(e, 'university')}
-                            className="hidden"
-                            id="uni-card"
-                          />
-                          {!previewUrls.university && (
-                            <label
-                              htmlFor="uni-card"
-                              className="inline-block mt-3 bg-[#ff0000] text-white font-bold px-6 py-2 text-sm uppercase tracking-wider cursor-pointer hover:bg-white hover:text-[#ff0000] border-2 border-[#ff0000] transition-all duration-300"
-                            >
-                              Choose File
-                            </label>
-                          )}
-                        </div>
-                        {errors.universityCard && (
-                          <p className="text-[#ff0000] text-xs mt-1">{errors.universityCard}</p>
-                        )}
-                      </div>
-                      {/* CNIC front/back UI (unchanged) */}
                       <div>
                         <label className="block text-white font-bold mb-3 text-sm md:text-base">
                           CNIC Front Side <span className="text-[#ff0000]">*</span>
@@ -589,16 +512,16 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                 </AnimatePresence>
               </div>
 
-              {/* Footer Navigation */}
               <div className="bg-[#222222] border-t-2 border-[#ff0000] p-4 md:p-6">
                 <div className="flex justify-between gap-4">
                   {currentStep > 1 && (
                     <motion.button
                       type="button"
                       onClick={prevStep}
+                      disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-transparent text-white font-bold px-6 py-3 text-sm md:text-base uppercase tracking-widest border-2 border-white hover:bg-white hover:text-[#222222] transition-all duration-300"
+                      className="flex-1 bg-transparent text-white font-bold px-6 py-3 text-sm md:text-base uppercase tracking-widest border-2 border-white hover:bg-white hover:text-[#222222] transition-all duration-300 disabled:opacity-50"
                     >
                       ← Previous
                     </motion.button>
@@ -618,11 +541,12 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                     <motion.button
                       type="button"
                       onClick={handleSubmit}
+                      disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-[#ff0000] text-white font-bold px-6 py-3 text-sm md:text-base uppercase tracking-widest border-2 border-[#ff0000] hover:bg-transparent hover:text-[#ff0000] transition-all duration-300"
+                      className="flex-1 bg-[#ff0000] text-white font-bold px-6 py-3 text-sm md:text-base uppercase tracking-widest border-2 border-[#ff0000] hover:bg-transparent hover:text-[#ff0000] transition-all duration-300 disabled:opacity-50"
                     >
-                      Submit Registration
+                      {isSubmitting ? 'Submitting...' : 'Submit Registration'}
                     </motion.button>
                   )}
                 </div>
