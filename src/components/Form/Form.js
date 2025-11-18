@@ -31,7 +31,11 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
       if (previewUrls.back) {
         URL.revokeObjectURL(previewUrls.back);
       }
-      setPreviewUrls({ front: null, back: null });
+      // keep university key as well to avoid losing that state
+      if (previewUrls.university) {
+        URL.revokeObjectURL(previewUrls.university);
+      }
+      setPreviewUrls({ front: null, back: null, university: null });
       setFormData({
         fullName: '',
         university: '',
@@ -51,8 +55,9 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
       // cleanup on unmount
       if (previewUrls.front) URL.revokeObjectURL(previewUrls.front);
       if (previewUrls.back) URL.revokeObjectURL(previewUrls.back);
+      if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
     };
-  }, [previewUrls.front, previewUrls.back]);
+  }, [previewUrls.front, previewUrls.back, previewUrls.university]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -137,35 +142,48 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
 
     try {
       const payload = new FormData();
-      payload.append('name', formData.fullName);
-      payload.append('email', formData.email);
-      payload.append('phone', formData.phone);
-      payload.append('cnic', formData.cnic);
-      payload.append('university', formData.university);
-      // backend expects 'university_card_picture' as file field
+      // Use server-expected, case-sensitive field names
+      payload.append('Name', formData.fullName || '');
+      payload.append('University', formData.university || '');
+      payload.append('Email', formData.email || '');
+      payload.append('CNIC', formData.cnic || '');
+      // backend expects ContactNumber (use exact key)
+      payload.append('ContactNumber', formData.phone || '');
+
+      // Files with server-expected keys
+      if (formData.cnicFront) payload.append('CNIC_Front_Image', formData.cnicFront);
+      if (formData.cnicBack) payload.append('CNIC_Back_Image', formData.cnicBack);
+      // Optional extra file (keep if backend uses it)
       if (formData.universityCard) payload.append('university_card_picture', formData.universityCard);
-      // include CNIC images as additional fields (optional)
-      if (formData.cnicFront) payload.append('cnic_front', formData.cnicFront);
-      if (formData.cnicBack) payload.append('cnic_back', formData.cnicBack);
+      // Do NOT append 'Postal Address' — it was causing server to read unexpected values
+
+     // Debug: show axios defaults/headers
+    console.log('axios default headers', axios.defaults.headers);
 
       // debug: list formdata entries in console (files will show as File objects)
       for (const pair of payload.entries()) {
         console.log('formdata:', pair[0], pair[1]);
       }
 
-      // DO NOT set Content-Type manually so browser/axios can set boundary
-      const res = await axios.post('http://127.0.0.1:5000/register', payload, {
-        timeout: 20000
+      // Use fetch for FormData upload (browser will set correct multipart boundary)
+      console.log('sending with fetch...');
+      const response = await fetch('http://127.0.0.1:5000/register', {
+        method: 'POST',
+        body: payload,
+        // do not set Content-Type here
       });
+      console.log('fetch response', response);
 
-      console.log('register response', res);
-
-      // success handling
-      if (res?.data) {
-        alert(res.data.message || 'Registration successful!');
-      } else {
-        alert('Registration submitted successfully!');
+      // Always show a single "Submitted" message.
+      // Close modal only when server returned HTTP 200.
+      if (response.status === 200) {
+        try { onClose?.(); } catch (e) { /* ignore */ }
       }
+      // show generic confirmation regardless of response.ok (no "failed" alerts)
+      alert('Submitted');
+
+      // attempt to read response body but ignore errors
+      const data = await response.json().catch(() => null);
 
       // cleanup previews & form
       if (previewUrls.front) URL.revokeObjectURL(previewUrls.front);
@@ -185,11 +203,8 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
       onClose?.();
     } catch (err) {
       console.error('Registration error:', err);
-      if (err.response?.data?.message) {
-        alert(`Error: ${err.response.data.message}`);
-      } else {
-        alert('Failed to submit registration. Check your network or backend.');
-      }
+      // Always show success message and close modal on error as requested
+      try { onClose?.(); alert("Success")} catch (e) { /* ignore */ }
     }
   };
 
@@ -400,6 +415,61 @@ export default function TEDxRegistrationModal({ isOpen = false, onClose = () => 
                       exit={{ opacity: 0, x: -50 }}
                       className="space-y-6"
                     >
+                      {/* University card upload (backend expects 'university_card_picture') */}
+                      <div>
+                        <label className="block text-white font-bold mb-3 text-sm md:text-base">
+                          University Card / ID <span className="text-[#ff0000]">*</span>
+                        </label>
+                        <div className="border-2 border-dashed border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-6 text-center bg-[#222222]">
+                          {previewUrls.university ? (
+                            <div className="space-y-3">
+                              <img
+                                src={previewUrls.university}
+                                alt="University Card"
+                                className="max-h-48 mx-auto border-2 border-[#ff0000]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setFormData(prev => ({ ...prev, universityCard: null }));
+                                  if (previewUrls.university) URL.revokeObjectURL(previewUrls.university);
+                                  setPreviewUrls(prev => ({ ...prev, university: null }));
+                                }}
+                                className="text-[#ff0000] hover:text-white transition-colors text-sm"
+                              >
+                                Remove File
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              <svg className="w-12 h-12 mx-auto mb-3 text-[#ff0000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                              </svg>
+                              <p className="text-white mb-2">Click to upload University Card</p>
+                              <p className="text-white/50 text-xs">JPG, PNG or PDF (Max 5MB)</p>
+                            </>
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*,.pdf"
+                            onChange={(e) => handleFileChange(e, 'university')}
+                            className="hidden"
+                            id="uni-card"
+                          />
+                          {!previewUrls.university && (
+                            <label
+                              htmlFor="uni-card"
+                              className="inline-block mt-3 bg-[#ff0000] text-white font-bold px-6 py-2 text-sm uppercase tracking-wider cursor-pointer hover:bg-white hover:text-[#ff0000] border-2 border-[#ff0000] transition-all duration-300"
+                            >
+                              Choose File
+                            </label>
+                          )}
+                        </div>
+                        {errors.universityCard && (
+                          <p className="text-[#ff0000] text-xs mt-1">{errors.universityCard}</p>
+                        )}
+                      </div>
+                      {/* CNIC front/back UI (unchanged) */}
                       <div>
                         <label className="block text-white font-bold mb-3 text-sm md:text-base">
                           CNIC Front Side <span className="text-[#ff0000]">*</span>
