@@ -83,7 +83,7 @@ export default function InstrumentalPerformance() {
                   <div className="absolute inset-0 blur-2xl bg-red-600 opacity-50 animate-pulse"></div>
                 </h2>
                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-700 tracking-widest uppercase animate-gradient">
-                  PERFORMANCE
+                  PERFORMANCE & DRAMA
                 </h3>
               </div>
 

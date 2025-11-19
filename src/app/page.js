@@ -11,7 +11,7 @@ import  TEDxRegistrationModal  from '@/components/Form/Form';
 // Past Events Carousel Component
  import InstrumentalPerformance from '@/components/Misc/MusicAndArt';
 // function PastEventsCarousel() {
-
+import PastEvents from '@/components/Misc/PastEvents';
 // Particle system component
 function ParticleField() {
   const points = useRef();
@@ -137,28 +137,75 @@ function Scene() {
 export default function TEDxHero() {
  const imageUrls = [
 
-  "/eventHighlights/12.jpg",
-  "/eventHighlights/13.jpg",
-  "/eventHighlights/14.jpg",
-  "/eventHighlights/15.jpg",
-  "/eventHighlights/16.jpg",
-  "/eventHighlights/17.jpg",
-  "/eventHighlights/18.jpg",
-  "/eventHighlights/19.jpg",
-  "/eventHighlights/20.jpg",
-  "/eventHighlights/21.jpg",
-  "/eventHighlights/22.jpg",
-  "/eventHighlights/23.jpg"
-];
+// "/eventHighlights/15.jpg",
+// "/eventHighlights/16.jpg",
+// "/eventHighlights/17.jpg",
+// "/eventHighlights/18.jpg",
+// "/eventHighlights/19.jpg",
+// "/eventHighlights/20.jpg",
+// "/eventHighlights/21.jpg",
+// "/eventHighlights/22.jpg",
+"/eventHighlights/23.jpg",
+"/eventHighlights/24.jpg",
+"/eventHighlights/25.jpg",
+"/eventHighlights/26.jpg",
+"/eventHighlights/27.jpg",
+"/eventHighlights/28.jpg",
+"/eventHighlights/29.jpg",
+"/eventHighlights/30.jpg",
 
-const clickableImages = [
+
+];
+const teamMembers = [
   {
-    src: "/path/to/image1.jpg",
+    name: "Fajar Saleem",
+    role: "Head Web Dev",
+  },
+  {
+    name: "Laiba Batool",
+    role: "Backend Developer",
+  },
+  {
+    name: "Dur-e-adan",
+    role: "Resource Collection & Research",
+  },
+  {
+    name: "Abdullah Khalid",
+    role: "Frontend Developer",
+  },
+];
+const clickableImages = [
+ 
+  {
+    src: "/Tedx OBs/MohammadAmir_President.jpg",
     alt: "Portfolio Item 1",
     href: "https://example.com/project1",
-    target: "_blank"
-  }
+    target: "_blank",
+    name: "Mudassar Rehman",
+    designation: "Deputy Curator",
+  },
+  
+  {
+    src: "/Tedx OBs/Muhammad ibrahim_.jpg",
+    alt: "Mohammed Amir",
+    name: "Mohammed Amir",
+    designation: "Curator"
+  },
+  {
+    src: "/Tedx OBs/Muhammad Awais_Co-Curator TEDx.jpg",
+    alt: "Muhammad Awais",
+    name: "Muhammad Awais",
+    designation: "Co Curator"
+  },
+  {
+    src: "/Tedx OBs/Mudassar Rehman Deputy Curater.jpg",
+    alt: "Mudassar Rehman",
+    name: "Mudassar Rehman",
+    designation: "Deputy Curator"
+  },
+  // ... add more images here
 ];
+
  
 
   const containerVariants = {
@@ -334,7 +381,7 @@ const clickableImages = [
                 variants={itemVariants}
                 className="text-white text-lg md:text-xl leading-relaxed max-w-xl"
               >
-                TED is a global nonprofit committed to exploring ideas that challenge perspectives, inspire curiosity, and encourage meaningful action. What began in 1984 as a convergence of Technology, Entertainment and Design has grown into a worldwide movement that welcomes voices from every field — science, innovation, humanities, business, art, and social change. Through TED Talks, educational series, podcasts, and thousands of independent TEDx events held across the world each year, TED works to make powerful ideas accessible to all. With no political or commercial agenda, TED continues to foster learning, connection, and dialogue, offering a platform where ideas can ignite conversations and shape a more thoughtful and informed future.
+                TED is a global nonprofit that shares powerful ideas through talks, events, and educational content. Started in 1984 around Technology, Entertainment, and Design, it has grown to include voices from every field and aims to make impactful ideas accessible to everyone, without political or commercial agendas.
               </motion.p>
 
               {/* Event Details */}
@@ -510,14 +557,8 @@ const clickableImages = [
             </h3>
             <div className="text-white text-base md:text-lg leading-relaxed max-w-4xl space-y-4">
               <p>
-                TEDx is a global initiative that brings the power of TED’s mission — ideas worth spreading — to local communities across the world. Each TEDx event is independently organized by committed volunteers who believe that a single idea, when shared, can shift perspectives, challenge assumptions, and ignite change.
-              </p>
-              <p>
-                Under a free license from TED, organizers curate thought-provoking talks, performances, and conversations that follow TED’s global standards while reflecting the unique voice of their community. TEDx events aim to create moments of clarity — the kind that make audiences pause, rethink, and see the world differently.
-              </p>
-              <p>
-                With thousands of events held annually, TEDx has become a catalyst for eye-opening insights, unexpected discoveries, and ideas that illuminate the path toward a more informed and inspired society.
-              </p>
+TEDx brings TED’s mission to local communities through independently organized events. Volunteers curate talks and performances that follow TED’s standards while reflecting their community’s voice. With thousands of events each year, TEDx sparks fresh perspectives, meaningful conversations, and ideas that inspire change.              </p>
+             
             </div>
           </motion.div>
         </div>
@@ -570,36 +611,7 @@ const clickableImages = [
     speaker: "Sobia Zafar",
     videoId: "92PqfXX8yTE"
   },
-  {
-    title: "Making Traveling Frictionless in Pakistan",
-    speaker: "Muhammad Azeem",
-    videoId: "277KAoGgsJI"
-  },
-  {
-    title: "Giving Back To Society Through Business Ventures",
-    speaker: "Umer Hussain",
-    videoId: "6tmUxCS8FVA"
-  },
-  {
-    title: "Taleem ki Taaqat (The Might of Education)",
-    speaker: "Master Ayub Khan",
-    videoId: "ba9-gihhcK8"
-  },
-  {
-    title: "The Importance of Listicles",
-    speaker: "Haseeb Sultan",
-    videoId: "qQhTezcKMHw"
-  },
-  {
-    title: "Taking Analytics to the Dance Floor",
-    speaker: "Tanveer Nandla",
-    videoId: "8Xkuuw4AuiE"
-  },
-  {
-    title: "Performance by Bilal Khan",
-    speaker: "Bilal Khan",
-    videoId: "S3CFkTbRx2Y"
-  }
+ 
 ].map((talk, idx) => (
   <motion.div
     key={idx}
@@ -652,19 +664,20 @@ const clickableImages = [
 
         </div>
       </motion.section>
- 
-<div className="h-[480px] px-0 mx-0 sm:h-[480px]  flex items-center justify-center w-full">
+
+<div className="h-[480px] px-0 mx-0 my-0 py-0 sm:h-[480px]  flex items-center justify-center w-full">
  <ThreeDImageRing 
    images={imageUrls} 
    imageDistance={600} 
    perspective={2000}
- width={300}
+ width={400}
    id="speakers"
    imageClassName="!bg-center"
  />
-</div>
+</div> 
+<PastEvents/>
 {/* Responsive 3D ring — full width on small devices, constrained on large */}
-<div className="w-full px-0 mx-0 h-[320px] sm:h-[480px] flex items-center justify-center">
+{/* <div className="w-full px-0 mx-0 h-[320px] sm:h-[480px] flex items-center justify-center">
  <div className="w-full max-w-4xl lg:max-w-none">
    <ThreeDImageRing
      images={imageUrls}
@@ -675,7 +688,7 @@ const clickableImages = [
      imageClassName="!bg-center"
     />
   </div>
-</div>
+</div> */}
 
       {/* Speakers Section */}
       <motion.section 
@@ -701,7 +714,7 @@ const clickableImages = [
               { name: "Orya Maqbool Jan", bio: "Orya Maqbool Jan is a senior columnist, poet, playwright, and intellectual widely recognized across Pakistan", image: "/Speakers/Orya Maqbool Jan.png" },
               { name: "Tuaha Ibn-e-Jalil", bio: "Tuaha Ibn e Jalil is a renowned motivational speaker and life coach inspiring millions through his transformative journey", image: "/Speakers/tuahaibnejalil.jpeg" },
               { name: "Dr Hurriya Khan", bio: "Dr. Hurriya Khan is a dedicated physician, mentor, and advocate for change, blending compassion with purpose.", image: "/Speakers/DrHUrriya.jpeg" },
-              { name: "Adeel Hashmi", bio: "Tech innovator building accessible healthcare solutions", image: "/Speakers/adeelhashmi.jpeg" },
+              // { name: "Adeel Hashmi", bio: "Tech innovator building accessible healthcare solutions", image: "/Speakers/adeelhashmi.jpeg" },
               { name: "Dr. Sassi Malik Sher", bio: "Educationist & Women Empowerment Advocate", image: "/Speakers/Dr. Sassi Malik Sher.png" },
               { name: "Raza Syed", bio: "Communications & Policy Expert", image: "/Speakers/Raza Syed.png" },
               { name: "Fahad Malik", bio: "Digital Media Specialist | Tamgha-e-Imtiaz", image: "/Speakers/Fahad Malik.jpeg" },
@@ -710,12 +723,12 @@ const clickableImages = [
               { name: "Fahad Shahbaz", bio: "Youth Leader & Founder of YGA Pakistan", image: "/Speakers/Fahad Shahbaz .png" },
               { name: "Sara Qureshi", bio: "Aerospace Engineer & CEO", image: "/Speakers/Sarah Quraishi .png" },
               { name: "Azam Jamil", bio: "Former Minister & Leadership Expert", image: "/Speakers/Azam Jamil.png" },
-              { name: "Shahzad Nawaz", bio: "Film Director & Actor", image: "/Speakers/Shahzad nawab.png" },
+              // { name: "Shahzad Nawaz", bio: "Film Director & Actor", image: "/Speakers/Shahzad nawab.png" },
                 { name: "Hisham Sarwar", bio: "Freelancing Industry Pioneer", image: "/Speakers/Hisham Sarwar.jpeg" },
   { name: "Brigadier Edgar Felix (Retired)", bio: "Strategic Defence Leader", image: "/Speakers/Brigadier Edgar Felix .png" },
-  { name: "Nasir Majeed Mirza", bio: "Ex-Rector PIEAS & Education Advocate", image: "/Speakers/nasir majeed.jpeg" },
+  // { name: "Nasir Majeed Mirza", bio: "Ex-Rector PIEAS & Education Advocate", image: "/Speakers/nasir majeed.jpeg" },
   { name: "Syeda Kashmala", bio: "Climate & Law Changemaker", image: "/Speakers/Syeda Kashmala.png" },
-  ,{ name: "Ahmed Asad", bio: "An accomplished engineer from NUST and MBA graduate from LUMS", image: "/Speakers/Ahmed Asad.jpeg" },
+  // ,{ name: "Ahmed Asad", bio: "An accomplished engineer from NUST and MBA graduate from LUMS", image: "/Speakers/Ahmed Asad.jpeg" },
             ].map((speaker, idx) => (
               <motion.div
                 key={idx}
@@ -751,7 +764,7 @@ const clickableImages = [
         </div>
       </motion.section>
            
-     
+   
   {/* Organizers Section */}
    <motion.section 
         initial={{ opacity: 0 }}
@@ -783,42 +796,23 @@ const clickableImages = [
           {/* Pyramid Layout */}
           <div className="flex flex-col items-center gap-8">
             {/* top */}
-          <div className="flex justify-center w-full">
-  {[
-   { name: "Mohammed Amir", role: "President", image: "/Tedx OBs/MohammadAmir_President.jpg" },
-  ].map((person, idx) => (
-    <motion.div
-      key={idx}
-      initial={{ y: 50, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: idx * 0.1 }}
-      whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-full sm:w-[280px]"
-    >
-      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
-        <img
-          src={person.image}
-          alt={person.name}
-          className="w-full h-full object-cover block"
-        />
-      </div>
-      <div className="text-center">
-        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
-          {person.name}
-        </h3>
-        <p className="text-white text-sm">{person.role}</p>
-      </div>
-    </motion.div>
-  ))}
-</div>
+          {/* <div className="max-w-3xl mx-auto px-4">
+  <ThreeDMarquee 
+    images={clickableImages}
+    onImageClick={(image, index) => {
+      console.log('Clicked:', image.alt, 'at index:', index);
+    }}
+  />
+</div> */}
 
             {/* Top Row - 3 people */}
           <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
-    { name: "Mohammed Amir", role: "Curator", image: "/Tedx OBs/Muhammad ibrahim_.jpg" },
+    {name:"Mohammad Amir",role:"Director",image:"/Tedx OBs/MohammadAmir_President.jpg"},
+    { name: "Mohammed Ibrahim", role: "Curator", image: "/Tedx OBs/Muhammad ibrahim_.jpg" },
     { name: "Muhammad Awais", role: "Co Curator", image: "/Tedx OBs/Muhammad Awais_Co-Curator TEDx.jpg" },
-    { name: "Mudassar Rehman", role: "Deputy Curator", image: "/Tedx OBs/Mudassar Rehman Deputy Curater.jpg" }
+    { name: "Mudassar Rehman", role: "Deputy Curator", image: "/Tedx OBs/Mudassar Rehman Deputy Curater.jpg" },
+    { name: "Mubashir Rafiq", role: "Deputy Deputy Curator", image: "/Tedx OBs/Mubashir Rafiq(Deputy Co-Curator).jpg" }
   ].map((person, idx) => (
     <motion.div
       key={idx}
@@ -827,7 +821,7 @@ const clickableImages = [
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
+      className="group bg-[#1a1a1a] border-2 border-[#ff0000] hover:border-[#ff3333] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px] shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:shadow-[0_0_30px_rgba(255,0,0,0.5)]"
     >
       <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
         <img
@@ -837,14 +831,20 @@ const clickableImages = [
         />
       </div>
       <div className="text-center">
-        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
+        <h3 className="text-[#ff0000] font-bold text-base sm:text-lg md:text-xl mb-1 group-hover:text-[#ff3333] transition-colors leading-tight">
           {person.name}
         </h3>
-        <p className="text-white text-sm">{person.role}</p>
+        <p className="text-white text-xs sm:text-sm">{person.role}</p>
       </div>
     </motion.div>
   ))}
 </div>
+ <motion.div 
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ duration: 1.5, delay: 1.8 }}
+                className="h-px bg-[#ff0000]"
+                style={{ width: "60px" }}
+              />
       {/* Top Row - 3 people */}
           <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
@@ -909,10 +909,22 @@ const clickableImages = [
     </motion.div>
   ))}
 </div>
+{/* Red Divider */}
+ <motion.div 
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ duration: 1.5, delay: 1.8 }}
+                className="h-px bg-[#ff0000]"
+                style={{ width: "60px" }}
+              />
 <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
     { name: "Hammad Tariq", role: "Representative MME", image: "/DRs/Hammad Tariq, Mme_.jpg" },
     { name: "Shahbaz Ahmed Shah", role: "Representative DEE", image: "/DRs/Shahbaz_Ahmed_Shah_DEE_DR.png" },
+     { name: "Momna Tul Jannat", role: "Representative CHEM", image: "/DRs/Copy of Momna tul jannat_head_task force.jpg" },
+    { name: "Muhammad Mursleen", role: "Representative DPAM", image: "/DRs/Muhammad Mursleen _DPAM.jpg" },
+     { name: "Zayan Rana", role: "Representative CIS", image: "/DRs/Zayan Rana.jpg" },
+    { name: "Abdul Haseeb", role: "Representative ME", image: "/DRs/Mujeeb Abdullah.jpg" },
+  
   ].map((person, idx) => (
     <motion.div
       key={idx}
@@ -939,6 +951,12 @@ const clickableImages = [
     </motion.div>
   ))}
 </div>
+ <motion.div 
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ duration: 1.5, delay: 1.8 }}
+                className="h-px bg-[#ff0000]"
+                style={{ width: "60px" }}
+              />
             {/* Middle Row - 5 people */}
             <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
               {[
@@ -1053,6 +1071,33 @@ const clickableImages = [
         </div>
       </motion.section>
 <InstrumentalPerformance /> 
+
+
+
+
+
+{/* team appreciation */}
+    <section className="relative z-10 py-8 px-6 md:px-12 bg-zinc-900 border-t border-zinc-800">
+      <div className="max-w-6xl mx-auto">
+        <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-6">
+          Made Possible By Our <span className="text-red-600">Team</span>
+        </h3>
+
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          {teamMembers.map((member, idx) => (
+            <div key={idx} className="text-center">
+              <h4 className="text-white font-bold text-base">
+                {member.name}
+              </h4>
+              <p className="text-gray-400 text-sm">
+                {member.role}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+ 
       {/* Footer */}
        <footer className="relative z-10 bg-[#1a1a1a] border-t-2 border-[#333333] py-12 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">

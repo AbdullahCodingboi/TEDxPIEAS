@@ -1,0 +1,2415 @@
+@import url("https://fonts.googleapis.com/css?family=Lato"); html {
+    line-height: 1.5;
+    text-size-adjust: 100%;
+    font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0px;
+}
+
+main {
+    display: block;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0px;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0px;
+    overflow: visible;
+}
+
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+a {
+    background-color: transparent;
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline dotted;
+}
+
+b, strong {
+    font-weight: bolder;
+}
+
+code, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+img {
+    border-style: none;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0px;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+}
+
+fieldset {
+    padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0px;
+    white-space: normal;
+}
+
+progress {
+    vertical-align: baseline;
+}
+
+textarea {
+    overflow: auto;
+}
+
+[type="checkbox"], [type="radio"] {
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+[type="search"] {
+    appearance: textfield;
+    outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+    appearance: none;
+}
+
+::-webkit-file-upload-button {
+    appearance: button;
+    font: inherit;
+}
+
+details {
+    display: block;
+}
+
+summary {
+    display: list-item;
+}
+
+template {
+    display: none;
+}
+
+[hidden] {
+    display: none;
+}
+
+#registration-page, #registration-html, #registration-body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Montserrat, Roboto, Arial, Helvetica, sans-serif;
+}
+
+#registration-html {
+    width: 100%;
+}
+
+#registration-body {
+    width: 100%;
+    margin: auto;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+a {
+    color: rgb(255, 119, 119);
+    line-height: 1.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 4rem;
+}
+
+p {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+}
+
+/* #registration-page #countdown {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background: url("/events/Theme-Dark-01.png") center top / cover fixed;
+} */
+
+#registration-page #countdown-wrapper {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#registration-page .box {
+    width: 20%;
+    max-width: 100px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+#registration-page .box > * {
+    margin: 0px;
+    padding: 0px;
+}
+
+#registration-page .countdown-digits {
+    font-size: 2rem;
+}
+
+#registration-page #box-last-date {
+    width: 100%;
+    background: rgba(255, 0, 0, 0.667);
+    color: rgb(255, 255, 255);
+    padding: 16px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#registration-page #box-last-date > * {
+    margin: 0px;
+    padding: 0px;
+}
+
+#registration-page #main {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    background: rgb(17, 17, 17);
+    border: 1px solid rgb(255, 0, 0);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+#registration-page header {
+    font-size: 80%;
+    color: rgb(255, 255, 255);
+}
+
+#registration-page header h1 {
+    font-size: 28px;
+}
+
+#registration-page .red-text {
+    color: rgb(255, 0, 0);
+}
+
+#registration-page .question-container {
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
+    justify-content: flex-start;
+    align-items: stretch;
+    background: rgb(51, 51, 51);
+    border: 1px solid rgb(255, 0, 0);
+    border-radius: 8px;
+    margin: 16px 0px;
+}
+
+#registration-page .question-container > * {
+    margin: 8px;
+    padding: 8px;
+}
+
+#registration-page .symbol-required {
+    color: rgb(255, 0, 0);
+}
+
+#registration-page .question-hint {
+    font-size: 70%;
+    margin: 0px 8px 16px;
+    padding: 0px 8px;
+}
+
+#registration-page .required-hint {
+    display: none;
+}
+
+#registration-page .question-input {
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 0.5px solid rgb(255, 0, 0);
+    border-radius: 10000px;
+    padding-left: 16px;
+}
+
+#registration-page .question-input:focus {
+    animation: 0.2s ease 0s 1 normal forwards running question-input-animation;
+}
+
+#registration-page .attendee-section {
+    width: 100%;
+    padding: 16px;
+    background: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+
+#registration-page #card18 {
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+#registration-page #section-overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(119, 119, 119, 0.467);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#registration-page #section-overlay #overlay-box {
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px;
+}
+
+#registration-page #section-overlay #overlay-image {
+    max-width: 256px;
+}
+
+.registration-button {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid rgb(255, 0, 0);
+    padding: 1em;
+    color: rgb(255, 0, 0);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out;
+}
+
+.registration-button:hover {
+    background-color: rgb(255, 0, 0);
+    color: black;
+}
+
+@keyframes question-input-animation {
+    0% {
+        border-bottom: 1px solid rgb(255, 0, 0);
+    }
+
+    100% {
+        border-bottom: 2px solid rgb(255, 0, 0);
+    }
+}
+
+@media (min-width: 800px) {
+    #registration-page #main {
+        width: 80%;
+    }
+}
+
+.overlay {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 32px;
+    color: rgb(230, 43, 30);
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: rgb(241, 241, 241);
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.nav-button {
+    z-index: 1;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    border-radius: 50%;
+    width: 30px;
+    padding: 0.25em;
+    margin: 0.5em;
+    display: block;
+    background-color: rgb(230, 43, 30);
+    border: 3px solid rgb(34, 34, 34);
+    font-size: 50px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 30px;
+}
+
+.nav-button span {
+    display: block;
+    height: 3px;
+    background-color: rgb(255, 255, 255);
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .nav-button span {
+        height: 3px;
+        margin: 3px 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-button {
+        margin: 0.5em;
+        padding: 0.2em;
+        width: 20px;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px;
+    }
+
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+.footer-content {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around;
+    padding: 2em 0px;
+}
+
+.footer-content .contact-info p {
+    margin-bottom: 0px;
+}
+
+.footer-content .contact-info .social-links {
+    padding: 2em 0px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-content .contact-info .social-links .social-links-facebook {
+    background-color: rgb(66, 103, 178);
+    border: 3px solid rgb(66, 103, 178);
+}
+
+.footer-content .contact-info .social-links .social-links-instagram {
+    background-color: rgb(131, 58, 180);
+    border: 3px solid rgb(131, 58, 180);
+}
+
+.footer-content .contact-info .social-links .social-links-twitter {
+    background-color: rgb(29, 161, 242);
+    border: 3px solid rgb(29, 161, 242);
+}
+
+.footer-content .contact-info .social-links .social-links-snapchat {
+    background-color: rgb(255, 252, 0);
+    border: 3px solid rgb(255, 252, 0);
+}
+
+.footer-content .contact-info .social-links .social-links-tumblr {
+    background-color: rgb(53, 70, 92);
+    border: 3px solid rgb(53, 70, 92);
+}
+
+.footer-content .contact-info .social-links img {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(128, 128, 128);
+    border: 3px solid rgb(128, 128, 128);
+    border-radius: 10px;
+    transition: background-color 250ms ease-in-out, border-color 250ms ease-in-out;
+}
+
+.footer-content .contact-info .social-links img:hover {
+    background-color: rgb(230, 43, 30);
+    border-color: rgb(230, 43, 30);
+}
+
+.footer-content .map iframe {
+    width: 50vw;
+    height: 50vh;
+}
+
+@media (max-width: 768px) {
+    .footer-content .map iframe {
+        width: 70vw;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 2em;
+    }
+}
+
+.panel-holder {
+    background-color: rgb(34, 34, 34);
+}
+
+.panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    min-height: 100vh;
+}
+
+.panel .text-part {
+    hyphens: none;
+    width: 50vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(34, 34, 34);
+    text-align: justify;
+    color: rgb(255, 255, 255);
+}
+
+.panel .text-part .text-part-content {
+    padding: 5em;
+}
+
+.panel .text-part .text-part-content .red-text {
+    color: rgb(230, 43, 30);
+}
+
+.panel .text-part .text-part-content .pieas-blue-text {
+    color: rgb(16, 78, 139);
+}
+
+.panel .text-part .text-part-content p {
+    margin-top: 5em;
+}
+
+@media (max-width: 768px) {
+    .panel .text-part .text-part-content {
+        padding: 2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .panel .text-part {
+        width: 100vw;
+    }
+}
+
+.panel .image-part {
+    border-radius: 50px;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: rgb(34, 34, 34);
+    width: 40vw;
+    height: 90vh;
+    transition: 250ms ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .panel .image-part {
+        width: 100vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .panel {
+        flex-flow: column;
+        height: unset;
+    }
+}
+
+.panel1 .text-part .text-part-content {
+    padding-top: 0px;
+}
+/* 
+.panel1 .image-part {
+    background-image: url("/events/pic3.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+} */
+
+.panel1 .image-part .date {
+    margin: 0px;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: rgb(230, 43, 30) 3px 2px 0px, rgb(34, 34, 34) 6px 4px 0px;
+    line-height: 4rem;
+}
+
+.panel1 .image-part #countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.panel1 .image-part #countdown .box {
+    margin: 0px 1rem;
+}
+
+.panel1 .image-part #countdown .box div {
+    font-size: 3rem;
+    text-shadow: rgb(230, 43, 30) 3px 2px 0px, rgb(255, 255, 255) 6px 4px 0px;
+}
+
+.panel1 .image-part #countdown .box .text {
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    margin: 0px;
+    font-weight: 700;
+}
+
+.panel1 .image-part .register {
+    padding: 0px;
+    border-radius: 5px;
+}
+
+.panel1 .image-part .register a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+}
+
+.panel1 .image-part .register a button {
+    color-scheme: unset;
+    forced-color-adjust: unset;
+    mask: unset;
+    math-depth: unset;
+    position: unset;
+    position-anchor: unset;
+    text-size-adjust: unset;
+    appearance: unset;
+    color: unset;
+    font-family: unset;
+    font-feature-settings: unset;
+    font-kerning: unset;
+    font-optical-sizing: unset;
+    font-palette: unset;
+    font-size: 1.5rem;
+    font-size-adjust: unset;
+    font-stretch: unset;
+    font-style: unset;
+    font-synthesis: unset;
+    font-variant: unset;
+    font-variation-settings: unset;
+    font-weight: unset;
+    position-area: unset;
+    text-orientation: unset;
+    text-rendering: unset;
+    text-spacing-trim: unset;
+    -webkit-font-smoothing: unset;
+    -webkit-locale: unset;
+    -webkit-text-orientation: unset;
+    -webkit-writing-mode: unset;
+    writing-mode: unset;
+    zoom: unset; accent-color: unset;
+    place-content: unset;
+    place-items: unset;
+    place-self: unset;
+    alignment-baseline: unset;
+    anchor-name: unset;
+    anchor-scope: unset;
+    animation-composition: unset;
+    animation: unset;
+    app-region: unset;
+    aspect-ratio: unset;
+    backdrop-filter: unset;
+    backface-visibility: unset;
+    background-attachment: unset;
+    background-blend-mode: unset;
+    background-clip: unset;
+    background-color: transparent;
+    background-image: unset;
+    background-origin: unset;
+    background-position: unset;
+    background-repeat: unset;
+    background-size: unset;
+    baseline-shift: unset;
+    baseline-source: unset;
+    block-size: unset;
+    border-block: unset; border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    border-collapse: unset;
+    border-end-end-radius: unset;
+    border-end-start-radius: unset;
+    border-inline: unset; border-start-end-radius: unset;
+    border-start-start-radius: unset;
+    inset: unset;
+    box-decoration-break: unset;
+    box-shadow: unset;
+    box-sizing: unset;
+    break-after: unset;
+    break-before: unset;
+    break-inside: unset;
+    buffered-rendering: unset;
+    caption-side: unset;
+    caret-animation: unset;
+    caret-color: unset;
+    clear: unset;
+    clip: unset;
+    clip-path: unset;
+    clip-rule: unset;
+    color-interpolation: unset;
+    color-interpolation-filters: unset;
+    color-rendering: unset;
+    columns: unset;
+    column-fill: unset;
+    gap: unset;
+    column-rule: unset;
+    column-span: unset;
+    contain: unset;
+    contain-intrinsic-block-size: unset;
+    contain-intrinsic-size: unset;
+    contain-intrinsic-inline-size: unset;
+    container: unset;
+    content: unset;
+    content-visibility: unset;
+    corner-shape: unset;
+    corner-block-end-shape: unset;
+    corner-block-start-shape: unset;
+    counter-increment: unset;
+    counter-reset: unset;
+    counter-set: unset;
+    cursor: unset;
+    cx: unset;
+    cy: unset;
+    d: unset;
+    display: unset;
+    dominant-baseline: unset;
+    dynamic-range-limit: unset;
+    empty-cells: unset;
+    field-sizing: unset;
+    fill: unset;
+    fill-opacity: unset;
+    fill-rule: unset;
+    filter: unset;
+    flex: unset;
+    flex-flow: unset;
+    float: unset;
+    flood-color: unset;
+    flood-opacity: unset;
+    grid: unset;
+    grid-area: unset;
+    height: unset;
+    hyphenate-character: unset;
+    hyphenate-limit-chars: unset;
+    hyphens: unset;
+    image-orientation: unset;
+    image-rendering: unset;
+    initial-letter: unset;
+    inline-size: unset;
+    inset-block: unset;
+    inset-inline: unset;
+    interpolate-size: unset;
+    isolation: unset;
+    letter-spacing: unset;
+    lighting-color: unset;
+    line-break: unset;
+    line-height: unset;
+    list-style: unset;
+    margin-block: unset; margin: unset;
+    margin-inline: unset; marker: unset;
+    mask-type: unset;
+    math-shift: unset;
+    math-style: unset;
+    max-block-size: unset;
+    max-height: unset;
+    max-inline-size: unset;
+    max-width: unset;
+    min-block-size: unset;
+    min-height: unset;
+    min-inline-size: unset;
+    min-width: unset;
+    mix-blend-mode: unset;
+    object-fit: unset;
+    object-position: unset;
+    object-view-box: unset;
+    offset: unset;
+    opacity: unset;
+    order: unset;
+    orphans: unset;
+    outline: unset;
+    outline-offset: unset;
+    overflow-anchor: unset;
+    overflow-block: unset;
+    overflow-clip-margin: unset;
+    overflow-inline: unset;
+    overflow-wrap: unset;
+    overflow: unset;
+    overlay: unset;
+    overscroll-behavior-block: unset;
+    overscroll-behavior-inline: unset;
+    overscroll-behavior: unset;
+    padding-block: unset; padding: 0.5em 1em;
+    padding-inline: unset; page: unset;
+    page-orientation: unset;
+    paint-order: unset;
+    perspective: unset;
+    perspective-origin: unset;
+    pointer-events: unset;
+    position-try: unset;
+    position-visibility: unset;
+    print-color-adjust: unset;
+    quotes: unset;
+    r: unset;
+    reading-flow: unset;
+    reading-order: unset;
+    resize: unset;
+    rotate: unset;
+    ruby-align: unset;
+    ruby-position: unset;
+    rx: unset;
+    ry: unset;
+    scale: unset;
+    scroll-behavior: unset;
+    scroll-initial-target: unset;
+    scroll-margin-block: unset;
+    scroll-margin: unset;
+    scroll-margin-inline: unset;
+    scroll-marker-group: unset;
+    scroll-padding-block: unset;
+    scroll-padding: unset;
+    scroll-padding-inline: unset;
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset; scroll-snap-type: unset;
+    scroll-target-group: unset;
+    scroll-timeline: unset;
+    scrollbar-color: unset;
+    scrollbar-gutter: unset;
+    scrollbar-width: unset;
+    shape-image-threshold: unset;
+    shape-margin: unset;
+    shape-outside: unset;
+    shape-rendering: unset;
+    size: unset;
+    speak: unset;
+    stop-color: unset;
+    stop-opacity: unset;
+    stroke: unset;
+    stroke-dasharray: unset;
+    stroke-dashoffset: unset;
+    stroke-linecap: unset;
+    stroke-linejoin: unset;
+    stroke-miterlimit: unset;
+    stroke-opacity: unset;
+    stroke-width: unset;
+    tab-size: unset;
+    table-layout: unset;
+    text-align: unset;
+    text-align-last: unset;
+    text-anchor: unset;
+    text-autospace: unset;
+    text-box: unset;
+    text-combine-upright: unset;
+    text-decoration: unset;
+    text-decoration-skip-ink: unset;
+    text-emphasis: unset;
+    text-emphasis-position: unset;
+    text-indent: unset;
+    text-overflow: unset;
+    text-shadow: unset;
+    text-transform: unset;
+    text-underline-offset: unset;
+    text-underline-position: unset;
+    text-wrap: unset;
+    timeline-scope: unset;
+    touch-action: unset;
+    transform: unset;
+    transform-box: unset;
+    transform-origin: unset;
+    transform-style: unset;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+    translate: unset;
+    user-select: unset;
+    vector-effect: unset;
+    vertical-align: unset;
+    view-timeline: unset;
+    view-transition-class: unset;
+    view-transition-group: unset;
+    view-transition-name: unset;
+    visibility: unset;
+    border-spacing: unset;
+    -webkit-box-align: unset;
+    -webkit-box-decoration-break: unset;
+    -webkit-box-direction: unset;
+    -webkit-box-flex: unset;
+    -webkit-box-ordinal-group: unset;
+    -webkit-box-orient: unset;
+    -webkit-box-pack: unset;
+    -webkit-box-reflect: unset;
+    -webkit-line-break: unset;
+    -webkit-line-clamp: unset;
+    -webkit-mask-box-image: unset;
+    -webkit-rtl-ordering: unset;
+    -webkit-ruby-position: unset;
+    -webkit-tap-highlight-color: unset;
+    -webkit-text-combine: unset;
+    -webkit-text-decorations-in-effect: unset;
+    -webkit-text-fill-color: unset;
+    -webkit-text-security: unset;
+    -webkit-text-stroke: unset;
+    -webkit-user-drag: unset;
+    white-space-collapse: unset;
+    widows: unset;
+    width: unset;
+    will-change: unset;
+    word-break: unset;
+    word-spacing: unset;
+    x: unset;
+    y: unset;
+    z-index: unset;
+}
+
+.panel1 .image-part .register a button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(230, 43, 30);
+}
+
+/* .panel2 .image-part {
+    background-image: url("/events/pic28.jpg");
+    background-position-y: 100%;
+}
+
+@media (max-width: 768px) {
+    .panel2 {
+        flex-flow: column-reverse;
+    }
+}
+
+.panel3 .image-part {
+    background-image: url("/events/pic10.jpg");
+}
+
+.panel4 .image-part {
+    background-image: url("/events/pic24.jpg");
+    background-position-y: 100%;
+}
+
+@media (max-width: 768px) {
+    .panel4 {
+        flex-flow: column-reverse;
+    }
+} */
+
+.panel-seperator {
+    min-height: 5rem;
+    background-color: rgb(34, 34, 34);
+}
+
+.speakers {
+    display: none;
+    padding-bottom: 2em;
+}
+
+.speakers .section-title {
+    margin: 0px;
+    padding: 2em;
+    text-align: center;
+}
+
+.speakers .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.speakers .section-content .card a {
+    width: 15rem;
+    padding: 2em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+}
+
+.speakers .section-content .card a .card-img img {
+    border-radius: 50%;
+    border: 5px solid rgb(230, 43, 30);
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+.speakers .section-content .card a .card-body .card-title h3 {
+    margin: 10px 0px 0px;
+    font-weight: 600;
+}
+
+.speakers .section-content .card a:hover .card-img img {
+    transform: scale(1.3);
+}
+
+.legacy {
+    background-color: rgb(255, 255, 255);
+    color: rgb(34, 34, 34);
+    padding-bottom: 2em;
+}
+
+.legacy .section-title {
+    padding: 2em;
+    text-align: center;
+}
+
+.legacy .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.legacy .section-content .card a {
+    padding: 2em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.legacy .section-content .card a .card-img img {
+    border: 5px solid rgb(230, 43, 30);
+    filter: grayscale(100%);
+    transition: 0.3s ease-in-out;
+}
+
+.legacy .section-content .card a .card-body .card-title h2 {
+    margin: 10px 0px 0px;
+    font-weight: 500;
+}
+
+.legacy .section-content .card a:hover .card-img img {
+    filter: grayscale(0);
+}
+
+@media (max-width: 768px) {
+    .legacy .section-content .card a {
+        padding: 0.5em;
+        margin: 2em 0px;
+    }
+}
+
+.videos {
+    background-color: rgb(34, 34, 34);
+    color: rgb(255, 255, 255);
+    padding-bottom: 2em;
+}
+
+.videos .section-title {
+    padding: 2em;
+    text-align: center;
+}
+
+.videos .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.videos .section-content .card {
+    padding: 0px 2em;
+}
+
+.videos .section-content .card iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .videos .section-content .card {
+        padding: 2em;
+    }
+}
+
+.videos .watch-more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3em;
+}
+
+.videos .watch-more-button a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.videos .watch-more-button a button {
+    color-scheme: unset;
+    forced-color-adjust: unset;
+    mask: unset;
+    math-depth: unset;
+    position: unset;
+    position-anchor: unset;
+    text-size-adjust: unset;
+    appearance: unset;
+    color: unset;
+    font-family: unset;
+    font-feature-settings: unset;
+    font-kerning: unset;
+    font-optical-sizing: unset;
+    font-palette: unset;
+    font-size: 18px;
+    font-size-adjust: unset;
+    font-stretch: unset;
+    font-style: unset;
+    font-synthesis: unset;
+    font-variant: unset;
+    font-variation-settings: unset;
+    font-weight: unset;
+    position-area: unset;
+    text-orientation: unset;
+    text-rendering: unset;
+    text-spacing-trim: unset;
+    -webkit-font-smoothing: unset;
+    -webkit-locale: unset;
+    -webkit-text-orientation: unset;
+    -webkit-writing-mode: unset;
+    writing-mode: unset;
+    zoom: unset; accent-color: unset;
+    place-content: unset;
+    place-items: unset;
+    place-self: unset;
+    alignment-baseline: unset;
+    anchor-name: unset;
+    anchor-scope: unset;
+    animation-composition: unset;
+    animation: unset;
+    app-region: unset;
+    aspect-ratio: unset;
+    backdrop-filter: unset;
+    backface-visibility: unset;
+    background-attachment: unset;
+    background-blend-mode: unset;
+    background-clip: unset;
+    background-color: transparent;
+    background-image: unset;
+    background-origin: unset;
+    background-position: unset;
+    background-repeat: unset;
+    background-size: unset;
+    baseline-shift: unset;
+    baseline-source: unset;
+    block-size: unset;
+    border-block: unset; border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    border-collapse: unset;
+    border-end-end-radius: unset;
+    border-end-start-radius: unset;
+    border-inline: unset; border-start-end-radius: unset;
+    border-start-start-radius: unset;
+    inset: unset;
+    box-decoration-break: unset;
+    box-shadow: unset;
+    box-sizing: unset;
+    break-after: unset;
+    break-before: unset;
+    break-inside: unset;
+    buffered-rendering: unset;
+    caption-side: unset;
+    caret-animation: unset;
+    caret-color: unset;
+    clear: unset;
+    clip: unset;
+    clip-path: unset;
+    clip-rule: unset;
+    color-interpolation: unset;
+    color-interpolation-filters: unset;
+    color-rendering: unset;
+    columns: unset;
+    column-fill: unset;
+    gap: unset;
+    column-rule: unset;
+    column-span: unset;
+    contain: unset;
+    contain-intrinsic-block-size: unset;
+    contain-intrinsic-size: unset;
+    contain-intrinsic-inline-size: unset;
+    container: unset;
+    content: unset;
+    content-visibility: unset;
+    corner-shape: unset;
+    corner-block-end-shape: unset;
+    corner-block-start-shape: unset;
+    counter-increment: unset;
+    counter-reset: unset;
+    counter-set: unset;
+    cursor: unset;
+    cx: unset;
+    cy: unset;
+    d: unset;
+    display: unset;
+    dominant-baseline: unset;
+    dynamic-range-limit: unset;
+    empty-cells: unset;
+    field-sizing: unset;
+    fill: unset;
+    fill-opacity: unset;
+    fill-rule: unset;
+    filter: unset;
+    flex: unset;
+    flex-flow: unset;
+    float: unset;
+    flood-color: unset;
+    flood-opacity: unset;
+    grid: unset;
+    grid-area: unset;
+    height: unset;
+    hyphenate-character: unset;
+    hyphenate-limit-chars: unset;
+    hyphens: unset;
+    image-orientation: unset;
+    image-rendering: unset;
+    initial-letter: unset;
+    inline-size: unset;
+    inset-block: unset;
+    inset-inline: unset;
+    interpolate-size: unset;
+    isolation: unset;
+    letter-spacing: unset;
+    lighting-color: unset;
+    line-break: unset;
+    line-height: unset;
+    list-style: unset;
+    margin-block: unset; margin: unset;
+    margin-inline: unset; marker: unset;
+    mask-type: unset;
+    math-shift: unset;
+    math-style: unset;
+    max-block-size: unset;
+    max-height: unset;
+    max-inline-size: unset;
+    max-width: unset;
+    min-block-size: unset;
+    min-height: unset;
+    min-inline-size: unset;
+    min-width: unset;
+    mix-blend-mode: unset;
+    object-fit: unset;
+    object-position: unset;
+    object-view-box: unset;
+    offset: unset;
+    opacity: unset;
+    order: unset;
+    orphans: unset;
+    outline: unset;
+    outline-offset: unset;
+    overflow-anchor: unset;
+    overflow-block: unset;
+    overflow-clip-margin: unset;
+    overflow-inline: unset;
+    overflow-wrap: unset;
+    overflow: unset;
+    overlay: unset;
+    overscroll-behavior-block: unset;
+    overscroll-behavior-inline: unset;
+    overscroll-behavior: unset;
+    padding-block: unset; padding: 0.5em 1em;
+    padding-inline: unset; page: unset;
+    page-orientation: unset;
+    paint-order: unset;
+    perspective: unset;
+    perspective-origin: unset;
+    pointer-events: unset;
+    position-try: unset;
+    position-visibility: unset;
+    print-color-adjust: unset;
+    quotes: unset;
+    r: unset;
+    reading-flow: unset;
+    reading-order: unset;
+    resize: unset;
+    rotate: unset;
+    ruby-align: unset;
+    ruby-position: unset;
+    rx: unset;
+    ry: unset;
+    scale: unset;
+    scroll-behavior: unset;
+    scroll-initial-target: unset;
+    scroll-margin-block: unset;
+    scroll-margin: unset;
+    scroll-margin-inline: unset;
+    scroll-marker-group: unset;
+    scroll-padding-block: unset;
+    scroll-padding: unset;
+    scroll-padding-inline: unset;
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset; scroll-snap-type: unset;
+    scroll-target-group: unset;
+    scroll-timeline: unset;
+    scrollbar-color: unset;
+    scrollbar-gutter: unset;
+    scrollbar-width: unset;
+    shape-image-threshold: unset;
+    shape-margin: unset;
+    shape-outside: unset;
+    shape-rendering: unset;
+    size: unset;
+    speak: unset;
+    stop-color: unset;
+    stop-opacity: unset;
+    stroke: unset;
+    stroke-dasharray: unset;
+    stroke-dashoffset: unset;
+    stroke-linecap: unset;
+    stroke-linejoin: unset;
+    stroke-miterlimit: unset;
+    stroke-opacity: unset;
+    stroke-width: unset;
+    tab-size: unset;
+    table-layout: unset;
+    text-align: unset;
+    text-align-last: unset;
+    text-anchor: unset;
+    text-autospace: unset;
+    text-box: unset;
+    text-combine-upright: unset;
+    text-decoration: unset;
+    text-decoration-skip-ink: unset;
+    text-emphasis: unset;
+    text-emphasis-position: unset;
+    text-indent: unset;
+    text-overflow: unset;
+    text-shadow: unset;
+    text-transform: unset;
+    text-underline-offset: unset;
+    text-underline-position: unset;
+    text-wrap: unset;
+    timeline-scope: unset;
+    touch-action: unset;
+    transform: unset;
+    transform-box: unset;
+    transform-origin: unset;
+    transform-style: unset;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+    translate: unset;
+    user-select: unset;
+    vector-effect: unset;
+    vertical-align: unset;
+    view-timeline: unset;
+    view-transition-class: unset;
+    view-transition-group: unset;
+    view-transition-name: unset;
+    visibility: unset;
+    border-spacing: unset;
+    -webkit-box-align: unset;
+    -webkit-box-decoration-break: unset;
+    -webkit-box-direction: unset;
+    -webkit-box-flex: unset;
+    -webkit-box-ordinal-group: unset;
+    -webkit-box-orient: unset;
+    -webkit-box-pack: unset;
+    -webkit-box-reflect: unset;
+    -webkit-line-break: unset;
+    -webkit-line-clamp: unset;
+    -webkit-mask-box-image: unset;
+    -webkit-rtl-ordering: unset;
+    -webkit-ruby-position: unset;
+    -webkit-tap-highlight-color: unset;
+    -webkit-text-combine: unset;
+    -webkit-text-decorations-in-effect: unset;
+    -webkit-text-fill-color: unset;
+    -webkit-text-security: unset;
+    -webkit-text-stroke: unset;
+    -webkit-user-drag: unset;
+    white-space-collapse: unset;
+    widows: unset;
+    width: unset;
+    will-change: unset;
+    word-break: unset;
+    word-spacing: unset;
+    x: unset;
+    y: unset;
+    z-index: unset;
+}
+
+.videos .watch-more-button a button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(34, 34, 34);
+}
+
+.register {
+    background: linear-gradient(328deg, rgb(230, 43, 30), rgb(34, 34, 34)) 0% 0% / 400% 400%;
+    animation: 5s ease 0s infinite normal none running AnimationName;
+    color: rgb(255, 255, 255);
+    padding-bottom: 2em;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 11%;
+    }
+
+    50% {
+        background-position: 100% 90%;
+    }
+
+    100% {
+        background-position: 0% 11%;
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 11%;
+    }
+
+    50% {
+        background-position: 100% 90%;
+    }
+
+    100% {
+        background-position: 0% 11%;
+    }
+}
+
+.register .section-title {
+    padding: 2em;
+    text-align: center;
+}
+
+.register .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.register .section-content .date {
+    margin: 0px;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: rgb(34, 34, 34) 4px 2px 0px;
+    line-height: 4rem;
+}
+
+.register .section-content #countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.register .section-content #countdown .box {
+    margin: 0px 1rem;
+}
+
+.register .section-content #countdown .box div {
+    font-size: 2rem;
+    text-shadow: rgb(34, 34, 34) 4px 2px 0px;
+}
+
+.register .section-content #countdown .box .text {
+    font-size: 1.5rem;
+    margin: 0px;
+    font-weight: 700;
+}
+
+.register .section-content a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+}
+
+.register .section-content a button {
+    color-scheme: unset;
+    forced-color-adjust: unset;
+    mask: unset;
+    math-depth: unset;
+    position: unset;
+    position-anchor: unset;
+    text-size-adjust: unset;
+    appearance: unset;
+    color: unset;
+    font-family: unset;
+    font-feature-settings: unset;
+    font-kerning: unset;
+    font-optical-sizing: unset;
+    font-palette: unset;
+    font-size: 1.5rem;
+    font-size-adjust: unset;
+    font-stretch: unset;
+    font-style: unset;
+    font-synthesis: unset;
+    font-variant: unset;
+    font-variation-settings: unset;
+    font-weight: unset;
+    position-area: unset;
+    text-orientation: unset;
+    text-rendering: unset;
+    text-spacing-trim: unset;
+    -webkit-font-smoothing: unset;
+    -webkit-locale: unset;
+    -webkit-text-orientation: unset;
+    -webkit-writing-mode: unset;
+    writing-mode: unset;
+    zoom: unset; accent-color: unset;
+    place-content: unset;
+    place-items: unset;
+    place-self: unset;
+    alignment-baseline: unset;
+    anchor-name: unset;
+    anchor-scope: unset;
+    animation-composition: unset;
+    animation: unset;
+    app-region: unset;
+    aspect-ratio: unset;
+    backdrop-filter: unset;
+    backface-visibility: unset;
+    background-attachment: unset;
+    background-blend-mode: unset;
+    background-clip: unset;
+    background-color: transparent;
+    background-image: unset;
+    background-origin: unset;
+    background-position: unset;
+    background-repeat: unset;
+    background-size: unset;
+    baseline-shift: unset;
+    baseline-source: unset;
+    block-size: unset;
+    border-block: unset; border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    border-collapse: unset;
+    border-end-end-radius: unset;
+    border-end-start-radius: unset;
+    border-inline: unset; border-start-end-radius: unset;
+    border-start-start-radius: unset;
+    inset: unset;
+    box-decoration-break: unset;
+    box-shadow: unset;
+    box-sizing: unset;
+    break-after: unset;
+    break-before: unset;
+    break-inside: unset;
+    buffered-rendering: unset;
+    caption-side: unset;
+    caret-animation: unset;
+    caret-color: unset;
+    clear: unset;
+    clip: unset;
+    clip-path: unset;
+    clip-rule: unset;
+    color-interpolation: unset;
+    color-interpolation-filters: unset;
+    color-rendering: unset;
+    columns: unset;
+    column-fill: unset;
+    gap: unset;
+    column-rule: unset;
+    column-span: unset;
+    contain: unset;
+    contain-intrinsic-block-size: unset;
+    contain-intrinsic-size: unset;
+    contain-intrinsic-inline-size: unset;
+    container: unset;
+    content: unset;
+    content-visibility: unset;
+    corner-shape: unset;
+    corner-block-end-shape: unset;
+    corner-block-start-shape: unset;
+    counter-increment: unset;
+    counter-reset: unset;
+    counter-set: unset;
+    cursor: unset;
+    cx: unset;
+    cy: unset;
+    d: unset;
+    display: unset;
+    dominant-baseline: unset;
+    dynamic-range-limit: unset;
+    empty-cells: unset;
+    field-sizing: unset;
+    fill: unset;
+    fill-opacity: unset;
+    fill-rule: unset;
+    filter: unset;
+    flex: unset;
+    flex-flow: unset;
+    float: unset;
+    flood-color: unset;
+    flood-opacity: unset;
+    grid: unset;
+    grid-area: unset;
+    height: unset;
+    hyphenate-character: unset;
+    hyphenate-limit-chars: unset;
+    hyphens: unset;
+    image-orientation: unset;
+    image-rendering: unset;
+    initial-letter: unset;
+    inline-size: unset;
+    inset-block: unset;
+    inset-inline: unset;
+    interpolate-size: unset;
+    isolation: unset;
+    letter-spacing: unset;
+    lighting-color: unset;
+    line-break: unset;
+    line-height: unset;
+    list-style: unset;
+    margin-block: unset; margin: unset;
+    margin-inline: unset; marker: unset;
+    mask-type: unset;
+    math-shift: unset;
+    math-style: unset;
+    max-block-size: unset;
+    max-height: unset;
+    max-inline-size: unset;
+    max-width: unset;
+    min-block-size: unset;
+    min-height: unset;
+    min-inline-size: unset;
+    min-width: unset;
+    mix-blend-mode: unset;
+    object-fit: unset;
+    object-position: unset;
+    object-view-box: unset;
+    offset: unset;
+    opacity: unset;
+    order: unset;
+    orphans: unset;
+    outline: unset;
+    outline-offset: unset;
+    overflow-anchor: unset;
+    overflow-block: unset;
+    overflow-clip-margin: unset;
+    overflow-inline: unset;
+    overflow-wrap: unset;
+    overflow: unset;
+    overlay: unset;
+    overscroll-behavior-block: unset;
+    overscroll-behavior-inline: unset;
+    overscroll-behavior: unset;
+    padding-block: unset; padding: 0.5em 1em;
+    padding-inline: unset; page: unset;
+    page-orientation: unset;
+    paint-order: unset;
+    perspective: unset;
+    perspective-origin: unset;
+    pointer-events: unset;
+    position-try: unset;
+    position-visibility: unset;
+    print-color-adjust: unset;
+    quotes: unset;
+    r: unset;
+    reading-flow: unset;
+    reading-order: unset;
+    resize: unset;
+    rotate: unset;
+    ruby-align: unset;
+    ruby-position: unset;
+    rx: unset;
+    ry: unset;
+    scale: unset;
+    scroll-behavior: unset;
+    scroll-initial-target: unset;
+    scroll-margin-block: unset;
+    scroll-margin: unset;
+    scroll-margin-inline: unset;
+    scroll-marker-group: unset;
+    scroll-padding-block: unset;
+    scroll-padding: unset;
+    scroll-padding-inline: unset;
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset; scroll-snap-type: unset;
+    scroll-target-group: unset;
+    scroll-timeline: unset;
+    scrollbar-color: unset;
+    scrollbar-gutter: unset;
+    scrollbar-width: unset;
+    shape-image-threshold: unset;
+    shape-margin: unset;
+    shape-outside: unset;
+    shape-rendering: unset;
+    size: unset;
+    speak: unset;
+    stop-color: unset;
+    stop-opacity: unset;
+    stroke: unset;
+    stroke-dasharray: unset;
+    stroke-dashoffset: unset;
+    stroke-linecap: unset;
+    stroke-linejoin: unset;
+    stroke-miterlimit: unset;
+    stroke-opacity: unset;
+    stroke-width: unset;
+    tab-size: unset;
+    table-layout: unset;
+    text-align: unset;
+    text-align-last: unset;
+    text-anchor: unset;
+    text-autospace: unset;
+    text-box: unset;
+    text-combine-upright: unset;
+    text-decoration: unset;
+    text-decoration-skip-ink: unset;
+    text-emphasis: unset;
+    text-emphasis-position: unset;
+    text-indent: unset;
+    text-overflow: unset;
+    text-shadow: unset;
+    text-transform: unset;
+    text-underline-offset: unset;
+    text-underline-position: unset;
+    text-wrap: unset;
+    timeline-scope: unset;
+    touch-action: unset;
+    transform: unset;
+    transform-box: unset;
+    transform-origin: unset;
+    transform-style: unset;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+    translate: unset;
+    user-select: unset;
+    vector-effect: unset;
+    vertical-align: unset;
+    view-timeline: unset;
+    view-transition-class: unset;
+    view-transition-group: unset;
+    view-transition-name: unset;
+    visibility: unset;
+    border-spacing: unset;
+    -webkit-box-align: unset;
+    -webkit-box-decoration-break: unset;
+    -webkit-box-direction: unset;
+    -webkit-box-flex: unset;
+    -webkit-box-ordinal-group: unset;
+    -webkit-box-orient: unset;
+    -webkit-box-pack: unset;
+    -webkit-box-reflect: unset;
+    -webkit-line-break: unset;
+    -webkit-line-clamp: unset;
+    -webkit-mask-box-image: unset;
+    -webkit-rtl-ordering: unset;
+    -webkit-ruby-position: unset;
+    -webkit-tap-highlight-color: unset;
+    -webkit-text-combine: unset;
+    -webkit-text-decorations-in-effect: unset;
+    -webkit-text-fill-color: unset;
+    -webkit-text-security: unset;
+    -webkit-text-stroke: unset;
+    -webkit-user-drag: unset;
+    white-space-collapse: unset;
+    widows: unset;
+    width: unset;
+    will-change: unset;
+    word-break: unset;
+    word-spacing: unset;
+    x: unset;
+    y: unset;
+    z-index: unset;
+}
+
+.register .section-content a button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(230, 43, 30);
+}
+
+.organizers .section-title {
+    padding: 2em;
+    text-align: center;
+}
+
+.organizers .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.organizers .section-content .card {
+    width: 15rem;
+    padding: 2em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+}
+
+.organizers .section-content .card .card-img img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgb(230, 43, 30);
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+.organizers .section-content .card .card-body {
+    text-align: center;
+}
+
+.organizers .section-content .card .card-body .card-title h3 {
+    margin: 10px 0px 0px;
+    font-weight: 600;
+}
+
+.organizers .section-content .card .card-body .card-text p {
+    margin: 0px;
+}
+
+.organizers .section-content .card:hover .card-img img {
+    transform: scale(1.3);
+}
+
+.organizers .see-more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3em;
+}
+
+.organizers .see-more-button a {
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+}
+
+.organizers .see-more-button a button {
+    color-scheme: unset;
+    forced-color-adjust: unset;
+    mask: unset;
+    math-depth: unset;
+    position: unset;
+    position-anchor: unset;
+    text-size-adjust: unset;
+    appearance: unset;
+    color: unset;
+    font-family: unset;
+    font-feature-settings: unset;
+    font-kerning: unset;
+    font-optical-sizing: unset;
+    font-palette: unset;
+    font-size: 18px;
+    font-size-adjust: unset;
+    font-stretch: unset;
+    font-style: unset;
+    font-synthesis: unset;
+    font-variant: unset;
+    font-variation-settings: unset;
+    font-weight: unset;
+    position-area: unset;
+    text-orientation: unset;
+    text-rendering: unset;
+    text-spacing-trim: unset;
+    -webkit-font-smoothing: unset;
+    -webkit-locale: unset;
+    -webkit-text-orientation: unset;
+    -webkit-writing-mode: unset;
+    writing-mode: unset;
+    zoom: unset; accent-color: unset;
+    place-content: unset;
+    place-items: unset;
+    place-self: unset;
+    alignment-baseline: unset;
+    anchor-name: unset;
+    anchor-scope: unset;
+    animation-composition: unset;
+    animation: unset;
+    app-region: unset;
+    aspect-ratio: unset;
+    backdrop-filter: unset;
+    backface-visibility: unset;
+    background-attachment: unset;
+    background-blend-mode: unset;
+    background-clip: unset;
+    background-color: transparent;
+    background-image: unset;
+    background-origin: unset;
+    background-position: unset;
+    background-repeat: unset;
+    background-size: unset;
+    baseline-shift: unset;
+    baseline-source: unset;
+    block-size: unset;
+    border-block: unset; border: 1px solid rgb(230, 43, 30);
+    border-radius: 5px;
+    border-collapse: unset;
+    border-end-end-radius: unset;
+    border-end-start-radius: unset;
+    border-inline: unset; border-start-end-radius: unset;
+    border-start-start-radius: unset;
+    inset: unset;
+    box-decoration-break: unset;
+    box-shadow: unset;
+    box-sizing: unset;
+    break-after: unset;
+    break-before: unset;
+    break-inside: unset;
+    buffered-rendering: unset;
+    caption-side: unset;
+    caret-animation: unset;
+    caret-color: unset;
+    clear: unset;
+    clip: unset;
+    clip-path: unset;
+    clip-rule: unset;
+    color-interpolation: unset;
+    color-interpolation-filters: unset;
+    color-rendering: unset;
+    columns: unset;
+    column-fill: unset;
+    gap: unset;
+    column-rule: unset;
+    column-span: unset;
+    contain: unset;
+    contain-intrinsic-block-size: unset;
+    contain-intrinsic-size: unset;
+    contain-intrinsic-inline-size: unset;
+    container: unset;
+    content: unset;
+    content-visibility: unset;
+    corner-shape: unset;
+    corner-block-end-shape: unset;
+    corner-block-start-shape: unset;
+    counter-increment: unset;
+    counter-reset: unset;
+    counter-set: unset;
+    cursor: unset;
+    cx: unset;
+    cy: unset;
+    d: unset;
+    display: unset;
+    dominant-baseline: unset;
+    dynamic-range-limit: unset;
+    empty-cells: unset;
+    field-sizing: unset;
+    fill: unset;
+    fill-opacity: unset;
+    fill-rule: unset;
+    filter: unset;
+    flex: unset;
+    flex-flow: unset;
+    float: unset;
+    flood-color: unset;
+    flood-opacity: unset;
+    grid: unset;
+    grid-area: unset;
+    height: unset;
+    hyphenate-character: unset;
+    hyphenate-limit-chars: unset;
+    hyphens: unset;
+    image-orientation: unset;
+    image-rendering: unset;
+    initial-letter: unset;
+    inline-size: unset;
+    inset-block: unset;
+    inset-inline: unset;
+    interpolate-size: unset;
+    isolation: unset;
+    letter-spacing: unset;
+    lighting-color: unset;
+    line-break: unset;
+    line-height: unset;
+    list-style: unset;
+    margin-block: unset; margin: unset;
+    margin-inline: unset; marker: unset;
+    mask-type: unset;
+    math-shift: unset;
+    math-style: unset;
+    max-block-size: unset;
+    max-height: unset;
+    max-inline-size: unset;
+    max-width: unset;
+    min-block-size: unset;
+    min-height: unset;
+    min-inline-size: unset;
+    min-width: unset;
+    mix-blend-mode: unset;
+    object-fit: unset;
+    object-position: unset;
+    object-view-box: unset;
+    offset: unset;
+    opacity: unset;
+    order: unset;
+    orphans: unset;
+    outline: unset;
+    outline-offset: unset;
+    overflow-anchor: unset;
+    overflow-block: unset;
+    overflow-clip-margin: unset;
+    overflow-inline: unset;
+    overflow-wrap: unset;
+    overflow: unset;
+    overlay: unset;
+    overscroll-behavior-block: unset;
+    overscroll-behavior-inline: unset;
+    overscroll-behavior: unset;
+    padding-block: unset; padding: 0.5em 1em;
+    padding-inline: unset; page: unset;
+    page-orientation: unset;
+    paint-order: unset;
+    perspective: unset;
+    perspective-origin: unset;
+    pointer-events: unset;
+    position-try: unset;
+    position-visibility: unset;
+    print-color-adjust: unset;
+    quotes: unset;
+    r: unset;
+    reading-flow: unset;
+    reading-order: unset;
+    resize: unset;
+    rotate: unset;
+    ruby-align: unset;
+    ruby-position: unset;
+    rx: unset;
+    ry: unset;
+    scale: unset;
+    scroll-behavior: unset;
+    scroll-initial-target: unset;
+    scroll-margin-block: unset;
+    scroll-margin: unset;
+    scroll-margin-inline: unset;
+    scroll-marker-group: unset;
+    scroll-padding-block: unset;
+    scroll-padding: unset;
+    scroll-padding-inline: unset;
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset; scroll-snap-type: unset;
+    scroll-target-group: unset;
+    scroll-timeline: unset;
+    scrollbar-color: unset;
+    scrollbar-gutter: unset;
+    scrollbar-width: unset;
+    shape-image-threshold: unset;
+    shape-margin: unset;
+    shape-outside: unset;
+    shape-rendering: unset;
+    size: unset;
+    speak: unset;
+    stop-color: unset;
+    stop-opacity: unset;
+    stroke: unset;
+    stroke-dasharray: unset;
+    stroke-dashoffset: unset;
+    stroke-linecap: unset;
+    stroke-linejoin: unset;
+    stroke-miterlimit: unset;
+    stroke-opacity: unset;
+    stroke-width: unset;
+    tab-size: unset;
+    table-layout: unset;
+    text-align: unset;
+    text-align-last: unset;
+    text-anchor: unset;
+    text-autospace: unset;
+    text-box: unset;
+    text-combine-upright: unset;
+    text-decoration: unset;
+    text-decoration-skip-ink: unset;
+    text-emphasis: unset;
+    text-emphasis-position: unset;
+    text-indent: unset;
+    text-overflow: unset;
+    text-shadow: unset;
+    text-transform: unset;
+    text-underline-offset: unset;
+    text-underline-position: unset;
+    text-wrap: unset;
+    timeline-scope: unset;
+    touch-action: unset;
+    transform: unset;
+    transform-box: unset;
+    transform-origin: unset;
+    transform-style: unset;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+    translate: unset;
+    user-select: unset;
+    vector-effect: unset;
+    vertical-align: unset;
+    view-timeline: unset;
+    view-transition-class: unset;
+    view-transition-group: unset;
+    view-transition-name: unset;
+    visibility: unset;
+    border-spacing: unset;
+    -webkit-box-align: unset;
+    -webkit-box-decoration-break: unset;
+    -webkit-box-direction: unset;
+    -webkit-box-flex: unset;
+    -webkit-box-ordinal-group: unset;
+    -webkit-box-orient: unset;
+    -webkit-box-pack: unset;
+    -webkit-box-reflect: unset;
+    -webkit-line-break: unset;
+    -webkit-line-clamp: unset;
+    -webkit-mask-box-image: unset;
+    -webkit-rtl-ordering: unset;
+    -webkit-ruby-position: unset;
+    -webkit-tap-highlight-color: unset;
+    -webkit-text-combine: unset;
+    -webkit-text-decorations-in-effect: unset;
+    -webkit-text-fill-color: unset;
+    -webkit-text-security: unset;
+    -webkit-text-stroke: unset;
+    -webkit-user-drag: unset;
+    white-space-collapse: unset;
+    widows: unset;
+    width: unset;
+    will-change: unset;
+    word-break: unset;
+    word-spacing: unset;
+    x: unset;
+    y: unset;
+    z-index: unset;
+}
+
+.organizers .see-more-button a button:hover {
+    background-color: rgb(230, 43, 30);
+    color: rgb(255, 255, 255);
+}
+
+#page-title {
+    text-align: center;
+    padding: 16px;
+    background-image: linear-gradient(-90deg, rgb(230, 43, 30) 0%, rgb(34, 34, 34) 100%);
+    color: rgb(255, 255, 255);
+}
+
+#page-title h1 {
+    margin: 0px;
+}
+
+.speaker-container {
+    padding: 2em 8em;
+}
+
+.speaker-container .speaker {
+    display: flex;
+    flex-flow: row;
+}
+
+.speaker-container .speaker .image-container {
+    padding: 2em;
+}
+
+.speaker-container .speaker .image-container img {
+    border: 5px solid rgb(230, 43, 30);
+    border-radius: 50%;
+    width: 150px;
+}
+
+@media (max-width: 768px) {
+    .speaker-container .speaker .image-container {
+        padding: unset;
+    }
+}
+
+@media (max-width: 768px) {
+    .speaker-container .speaker {
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 0px;
+    }
+
+    .speaker-container .speaker:nth-child(2n) {
+        flex-flow: column-reverse;
+    }
+}
+
+@media (max-width: 768px) {
+    .speaker-container {
+        padding: 2em;
+    }
+}
+
+#page-title {
+    text-align: center;
+    padding: 16px;
+    background-image: linear-gradient(-90deg, rgb(230, 43, 30) 0%, rgb(34, 34, 34) 100%);
+    color: white;
+}
+
+#page-title h1 {
+    margin: 0px;
+}
+
+.container .text-box {
+    color: rgb(255, 255, 255);
+    background-color: rgb(34, 34, 34);
+    display: flex;
+    flex-flow: row;
+}
+
+.container .text-box .theme {
+    width: 50vw;
+    padding: 4em 2em;
+}
+
+.container .text-box .theme .red-text {
+    color: rgb(230, 43, 30);
+    margin: 0px;
+    padding: 0px;
+}
+
+.container .text-box .theme h2 {
+    margin: 0px;
+}
+
+.container .text-box .theme .x-meaning {
+    margin: 0px;
+    position: relative;
+    top: -32px;
+}
+
+@media (max-width: 768px) {
+    .container .text-box .theme {
+        width: unset;
+    }
+}
+
+.container .text-box .intro-text {
+    width: 50vw;
+    background-color: rgb(230, 43, 30);
+    color: rgb(255, 255, 255);
+    padding: 4em 2em;
+}
+
+@media (max-width: 768px) {
+    .container .text-box .intro-text {
+        width: unset;
+    }
+}
+
+@media (max-width: 768px) {
+    .container .text-box {
+        flex-flow: column;
+    }
+}
+
+.container .title {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.container .past-speakers {
+    margin: 0px;
+    padding: 32px;
+    background-color: rgb(255, 255, 255);
+}
+
+.container .past-speakers .speakers-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.container .past-speakers .speakers-container .card a {
+    width: 15rem;
+    padding: 2em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+}
+
+.container .past-speakers .speakers-container .card a .card-img img {
+    border-radius: 50%;
+    border: 5px solid rgb(230, 43, 30);
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+.container .past-speakers .speakers-container .card a .card-body .card-title h3 {
+    margin: 10px 0px 0px;
+    font-weight: 600;
+}
+
+.container .past-speakers .speakers-container .card a:hover .card-img img {
+    transform: scale(1.3);
+}
+
+.container .legacy-videos .videos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.container .legacy-videos .videos-container .video {
+    padding: 1em 2em;
+}
+
+.container .legacy-videos .videos-container .video iframe {
+    width: 100%;
+    height: 100%;
+}
+
+#page-title {
+    text-align: center;
+    padding: 16px;
+    background-image: linear-gradient(-90deg, rgb(230, 43, 30) 0%, rgb(34, 34, 34) 100%);
+    color: rgb(255, 255, 255);
+}
+
+#page-title h1 {
+    margin: 0px;
+}
+
+.organizer-section .section-title {
+    padding: 2em;
+    text-align: center;
+}
+
+.organizer-section .section-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.organizer-section .section-content .card {
+    width: 15rem;
+    padding: 2em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+}
+
+.organizer-section .section-content .card .card-img img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgb(230, 43, 30);
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+.organizer-section .section-content .card .card-body {
+    text-align: center;
+}
+
+.organizer-section .section-content .card .card-body .card-title h3 {
+    margin: 10px 0px 0px;
+    font-weight: 600;
+}
+
+.organizer-section .section-content .card .card-body .card-text p {
+    margin: 0px;
+}
+
+.organizer-section .section-content .card:hover .card-img img {
+    transform: scale(1.3);
+}

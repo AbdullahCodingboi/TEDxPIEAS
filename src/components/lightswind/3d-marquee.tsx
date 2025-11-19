@@ -6,6 +6,8 @@ import React from "react";
 export interface MarqueeImage {
   src: string;
   alt: string;
+  name?: string;
+  designation?: string;
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
 }
@@ -42,7 +44,7 @@ export const ThreeDMarquee: React.FC<ThreeDMarqueeProps> = ({
   return (
     <section
       className={`mx-auto block h-[600px] max-sm:h-[400px] 
-        overflow-hidden rounded-2xl bg-white dark:bg-black ${className}`}
+        overflow-hidden rounded-2xl bg-white dark:bg-[#222222] ${className}`}
     >
       <div
         className="flex w-full h-full items-center justify-center"
@@ -75,18 +77,36 @@ export const ThreeDMarquee: React.FC<ThreeDMarqueeProps> = ({
                   return (
                     <div key={`img-${imgIdx}`} className="relative">
                       <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700" />
-                      <motion.img
+                      <motion.div
                         whileHover={{ y: -10 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        src={image.src}
-                        alt={image.alt}
-                        width={970}
-                        height={700}
-                        className={`aspect-[970/700] w-full max-w-[200px] rounded-lg object-cover ring ring-gray-300/30 dark:ring-gray-800/50 shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
-                          isClickable ? "cursor-pointer" : ""
-                        }`}
-                        onClick={() => handleImageClick(image, globalIndex)}
-                      />
+                        className="w-full max-w-[200px]"
+                      >
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          width={970}
+                          height={700}
+                          className={`aspect-[970/700] w-full rounded-lg object-cover ring ring-gray-300/30 dark:ring-gray-800/50 shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
+                            isClickable ? "cursor-pointer" : ""
+                          }`}
+                          onClick={() => handleImageClick(image, globalIndex)}
+                        />
+                        {(image.name || image.designation) && (
+                          <div className="mt-3 text-center bg-[#1a1a1a] border-2 border-[#2a2a2a] p-3 rounded-lg">
+                            {image.name && (
+                              <h3 className="text-white font-bold text-base">
+                                {image.name}
+                              </h3>
+                            )}
+                            {image.designation && (
+                              <p className="text-gray-400 text-sm mt-1">
+                                {image.designation}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </motion.div>
                     </div>
                   );
                 })}
