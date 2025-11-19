@@ -808,11 +808,11 @@ TEDx brings TED’s mission to local communities through independently organized
             {/* Top Row - 3 people */}
           <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
   {[
-    {name:"Mohammad Amir",role:"Director",image:"/Tedx OBs/MohammadAmir_President.jpg"},
+    {name:"Mohammad Amir",role:"President",image:"/Tedx OBs/MohammadAmir_President.jpg"},
     { name: "Mohammed Ibrahim", role: "Curator", image: "/Tedx OBs/Muhammad ibrahim_.jpg" },
     { name: "Muhammad Awais", role: "Co Curator", image: "/Tedx OBs/Muhammad Awais_Co-Curator TEDx.jpg" },
     { name: "Mudassar Rehman", role: "Deputy Curator", image: "/Tedx OBs/Mudassar Rehman Deputy Curater.jpg" },
-    { name: "Mubashir Rafiq", role: "Deputy Deputy Curator", image: "/Tedx OBs/Mubashir Rafiq(Deputy Co-Curator).jpg" }
+    { name: "Mubashir Rafiq", role: "Deputy Co Curator", image: "/Tedx OBs/Mubashir Rafiq(Deputy Co-Curator).jpg" }
   ].map((person, idx) => (
     <motion.div
       key={idx}
