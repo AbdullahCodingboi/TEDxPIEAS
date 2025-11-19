@@ -363,14 +363,16 @@ const clickableImages = [
 
               {/* CTA Buttons */}
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
-                <motion.button
+                <motion.a
+                href={'https://forms.gle/WKtY7xUr5WDrnuAf9'}
+                target="_blank"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setRegistrationOpen(true)}
+                  // onClick={() => setRegistrationOpen(true)}
                   className="bg-[#ff0000] text-white font-bold px-10 py-4 text-base uppercase tracking-widest border-2 border-[#ff0000] hover:bg-transparent hover:text-[#ff0000] transition-all duration-300"
                 >
                   Register Now
-                </motion.button>
+                </motion.a>
                 <Link href="/LearnMore">
                 <motion.button
                 
@@ -1147,7 +1149,7 @@ const clickableImages = [
     </footer>
 
       {/* place modal near root of this component so it mounts above everything */}
-      <TEDxRegistrationModal isOpen={registrationOpen} onClose={() => setRegistrationOpen(false)} />
+      {/* <TEDxRegistrationModal isOpen={registrationOpen} onClose={() => setRegistrationOpen(false)} /> */}
     </div>
   );
 }
