@@ -675,7 +675,7 @@ TEDx brings TED’s mission to local communities through independently organized
    imageClassName="!bg-center"
  />
 </div> 
-<PastEvents/>
+
 {/* Responsive 3D ring — full width on small devices, constrained on large */}
 {/* <div className="w-full px-0 mx-0 h-[320px] sm:h-[480px] flex items-center justify-center">
  <div className="w-full max-w-4xl lg:max-w-none">
@@ -763,7 +763,7 @@ TEDx brings TED’s mission to local communities through independently organized
           </div>
         </div>
       </motion.section>
-           
+           <InstrumentalPerformance /> 
    
   {/* Organizers Section */}
    <motion.section 
@@ -910,47 +910,8 @@ TEDx brings TED’s mission to local communities through independently organized
   ))}
 </div>
 {/* Red Divider */}
- <motion.div 
-                animate={{ width: ["0%", "100%"] }}
-                transition={{ duration: 1.5, delay: 1.8 }}
-                className="h-px bg-[#ff0000]"
-                style={{ width: "60px" }}
-              />
-<div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
-  {[
-    { name: "Hammad Tariq", role: "Representative MME", image: "/DRs/Hammad Tariq, Mme_.jpg" },
-    { name: "Shahbaz Ahmed Shah", role: "Representative DEE", image: "/DRs/Shahbaz_Ahmed_Shah_DEE_DR.png" },
-     { name: "Momna Tul Jannat", role: "Representative CHEM", image: "/DRs/Copy of Momna tul jannat_head_task force.jpg" },
-    { name: "Muhammad Mursleen", role: "Representative DPAM", image: "/DRs/Muhammad Mursleen _DPAM.jpg" },
-     { name: "Zayan Rana", role: "Representative CIS", image: "/DRs/Zayan Rana.jpg" },
-    { name: "Abdul Haseeb", role: "Representative ME", image: "/DRs/Mujeeb Abdullah.jpg" },
-  
-  ].map((person, idx) => (
-    <motion.div
-      key={idx}
-      initial={{ y: 50, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: idx * 0.1 }}
-      whileHover={{ scale: 1.02 }}
-      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
-    >
-      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
-        <img
-          src={person.image}
-          alt={person.name}
-          className="w-full h-full object-cover block"
-        />
-      </div>
-      <div className="text-center">
-        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
-          {person.name}
-        </h3>
-        <p className="text-white text-sm">{person.role}</p>
-      </div>
-    </motion.div>
-  ))}
-</div>
+
+
  <motion.div 
                 animate={{ width: ["0%", "100%"] }}
                 transition={{ duration: 1.5, delay: 1.8 }}
@@ -1066,11 +1027,51 @@ TEDx brings TED’s mission to local communities through independently organized
     </motion.div>
   ))}
 </div>
-
+ <motion.div 
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ duration: 1.5, delay: 1.8 }}
+                className="h-px bg-[#ff0000]"
+                style={{ width: "60px" }}
+              />
+<div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
+  {[
+    { name: "Hammad Tariq", role: "Representative MME", image: "/DRs/Hammad Tariq, Mme_.jpg" },
+    { name: "Shahbaz Ahmed Shah", role: "Representative DEE", image: "/DRs/Shahbaz_Ahmed_Shah_DEE_DR.png" },
+     { name: "Momna Tul Jannat", role: "Representative CHEM", image: "/DRs/Copy of Momna tul jannat_head_task force.jpg" },
+    { name: "Muhammad Mursleen", role: "Representative DPAM", image: "/DRs/Muhammad Mursleen _DPAM.jpg" },
+     { name: "Zayan Rana", role: "Representative CIS", image: "/DRs/Zayan Rana.jpg" },
+    { name: "Abdul Haseeb", role: "Representative ME", image: "/DRs/Mujeeb Abdullah.jpg" },
+  
+  ].map((person, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className="group bg-[#1a1a1a] border-2 border-[#333333] hover:border-[#ff0000] transition-all duration-300 p-4 sm:p-6 flex flex-col items-center gap-4 min-h-[140px] w-[calc(33.333%-16px)] sm:w-[280px]"
+    >
+      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#333333] border-2 border-white flex-shrink-0 flex items-center justify-center">
+        <img
+          src={person.image}
+          alt={person.name}
+          className="w-full h-full object-cover block"
+        />
+      </div>
+      <div className="text-center">
+        <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-[#ff0000] transition-colors">
+          {person.name}
+        </h3>
+        <p className="text-white text-sm">{person.role}</p>
+      </div>
+    </motion.div>
+  ))}
+</div>
           </div>
         </div>
       </motion.section>
-<InstrumentalPerformance /> 
+
 
 
 

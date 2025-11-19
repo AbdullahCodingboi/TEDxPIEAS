@@ -4,7 +4,7 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
-
+import PastEvents from '@/components/Misc/PastEvents';
 // Particle system component
 function ParticleField() {
   const points = useRef();
@@ -426,7 +426,110 @@ export default function LearnMorePage() {
         </div>
       </motion.section>
 
-      {/* Why Attend Section */}
+    <PastEvents/>
+
+      {/* Event Format Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="relative z-10 py-10 px-6 md:px-12 bg-[#1a1a1a]"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ y: -30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-white mb-12"
+          >
+            Event <span className="text-[#ff0000]">Timeline</span>
+          </motion.h2>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-3"
+          >
+            {[
+             {
+  time: "09:30 - 10:00 AM",
+  title: "Registration & Welcome",
+  description: "Attendees and guests arrive, register, and network"
+},
+{
+  time: "10:00 - 10:15 AM",
+  title: "Opening Ceremony",
+  description: "National Anthem, Curator's welcome, and Chief Guest's address"
+},
+{
+  time: "10:15 AM - 12:15 PM",
+  title: "Morning Speaker Session (Talks 1-6)",
+  description: "Six guest talks (~20 min each) on innovation, leadership, and purposeful decision-making"
+},
+{
+  time: "12:15 - 12:35 PM",
+  title: "Drama on Entrepreneurship",
+  description: "A 20-minute original play 'The Weight of Choices' highlighting risk, resilience, and choices in entrepreneurship"
+},
+{
+  time: "12:35 - 01:00 PM",
+  title: "Mid day Speaker Session (Talks 7-8)",
+  description: "Two impactful talks (~12 min each) leading into the lunch break"
+},
+{
+  time: "01:00 - 01:30 PM",
+  title: "Lunch Break",
+  description: "Single consolidated break for all attendees and guests"
+},
+{
+  time: "01:30 - 04:30 PM",
+  title: "Afternoon Speaker Session (Talks 9-18)",
+  description: "Nine guest talks (~20 min each) focusing on sustainability, ethics, creativity, and life decisions"
+},
+{
+  time: "04:30 - 04:50 PM",
+  title: "Instrumental Performance",
+  description: "20-minute live performance by PIEAS student"
+},
+{
+  time: "04:50 - 05:50 PM",
+  title: "Interactive Panel & Reflections",
+  description: "Moderator-led discussion and Q&A with select speakers exploring 'The Weight of Choices' in depth"
+},
+{
+  time: "05:50 - 06:30 PM",
+  title: "Closing Ceremony",
+  description: "Curator's reflections, acknowledgments, and presentation of souvenirs"
+},
+{
+  time: "06:30 - 07:00 PM",
+  title: "Departure",
+  description: "Conclusion of TEDxPIEAS 2025"
+}
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="flex gap-6 mb-0 items-start group"
+              >
+                <div className="flex-shrink-0 w-32">
+                  <div className="bg-[#ff0000] text-white font-black text-sm py-2 px-4 text-center">
+                    {item.time}
+                  </div>
+                </div>
+                <div className="flex-1 bg-[#222222] border-2 border-[#333333] group-hover:border-[#ff0000] transition-all duration-300 p-6">
+                  <h3 className="text-white font-black text-xl mb-2">{item.title}</h3>
+                  <p className="text-white">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+  {/* Why Attend Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -497,109 +600,6 @@ export default function LearnMorePage() {
           </motion.div>
         </div>
       </motion.section>
-
-      {/* Event Format Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="relative z-10 py-10 px-6 md:px-12 bg-[#1a1a1a]"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 
-            initial={{ y: -30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black text-white mb-12"
-          >
-            Event <span className="text-[#ff0000]">Format</span>
-          </motion.h2>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-3"
-          >
-            {[
-             {
-  time: "09:30 - 10:00 AM",
-  title: "Registration & Welcome",
-  description: "Attendees and guests arrive, register, and network"
-},
-{
-  time: "10:00 - 10:15 AM",
-  title: "Opening Ceremony",
-  description: "National Anthem, Curator's welcome, and Chief Guest's address"
-},
-{
-  time: "10:15 AM - 12:15 PM",
-  title: "Morning Speaker Session (Talks 1-6)",
-  description: "Six guest talks (~20 min each) on innovation, leadership, and purposeful decision-making"
-},
-{
-  time: "12:15 - 12:35 PM",
-  title: "Drama on Entrepreneurship",
-  description: "A 20-minute original play 'The Weight of Choices' highlighting risk, resilience, and choices in entrepreneurship"
-},
-{
-  time: "12:35 - 01:00 PM",
-  title: "Midday Speaker Session (Talks 7-8)",
-  description: "Two impactful talks (~12 min each) leading into the lunch break"
-},
-{
-  time: "01:00 - 01:30 PM",
-  title: "Lunch Break",
-  description: "Single consolidated break for all attendees and guests"
-},
-{
-  time: "01:30 - 04:30 PM",
-  title: "Afternoon Speaker Session (Talks 9-18)",
-  description: "Nine guest talks (~20 min each) focusing on sustainability, ethics, creativity, and life decisions"
-},
-{
-  time: "04:30 - 04:50 PM",
-  title: "Instrumental Performance",
-  description: "20-minute live performance by PIEAS student"
-},
-{
-  time: "04:50 - 05:50 PM",
-  title: "Interactive Panel & Reflections",
-  description: "Moderator-led discussion and Q&A with select speakers exploring 'The Weight of Choices' in depth"
-},
-{
-  time: "05:50 - 06:30 PM",
-  title: "Closing Ceremony",
-  description: "Curator's reflections, acknowledgments, and presentation of souvenirs"
-},
-{
-  time: "06:30 - 07:00 PM",
-  title: "Vote of Thanks & Departure",
-  description: "Group photo and conclusion of TEDxPIEAS 2025"
-}
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="flex gap-6 mb-0 items-start group"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="bg-[#ff0000] text-white font-black text-sm py-2 px-4 text-center">
-                    {item.time}
-                  </div>
-                </div>
-                <div className="flex-1 bg-[#222222] border-2 border-[#333333] group-hover:border-[#ff0000] transition-all duration-300 p-6">
-                  <h3 className="text-white font-black text-xl mb-2">{item.title}</h3>
-                  <p className="text-white">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
       {/* CTA Section */}
       <motion.section 
         initial={{ opacity: 0 }}
