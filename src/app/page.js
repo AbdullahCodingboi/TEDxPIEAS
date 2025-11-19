@@ -790,7 +790,7 @@ TEDx brings TED’s mission to local communities through independently organized
             transition={{ delay: 0.2 }}
             className="text-white text-center mb-16 text-lg"
           >
-            Organizers & Coordinators making it happen
+            The Organizing Committee
           </motion.p>
 
           {/* Pyramid Layout */}
