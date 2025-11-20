@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, useState,useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { motion } from 'framer-motion';
+import { motion,AnimatePresence  } from 'framer-motion';
 import * as THREE from 'three';
 import { ThreeDImageRing } from "@/components/lightswind/3d-image-ring";
 import Link from "next/link";
@@ -159,7 +159,7 @@ export default function TEDxHero() {
 const teamMembers = [
   {
     name: "Fajar Saleem",
-    role: "Head Web Dev",
+    role: "Lead",
   },
   {
     name: "Laiba Batool",
@@ -292,7 +292,7 @@ const clickableImages = [
       document.documentElement.style.scrollBehavior = prev || "";
     };
   }, []);
-     
+     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div id="home" className="relative min-h-screen bg-[#222222] overflow-hidden">
       {/* 3D Background */}
@@ -304,47 +304,114 @@ const clickableImages = [
 
       {/* Navigation */}
       <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', damping: 20 }}
-        className="relative z-10 flex items-center justify-between px-6 md:px-12 py-6"
-      >
-        <motion.div 
-          variants={logoVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex items-center space-x-2"
-        >
-          <div className="text-white font-bold text-xl md:text-2xl">
-            TEDx<span className="text-[#ff0000]">PIEAS</span>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="hidden md:flex space-x-8 text-sm text-white"
-        >
-          <a href="#home" className="hover:text-[#ff0000] transition-colors">HOME</a>
-          <a href="#about" className="hover:text-[#ff0000] transition-colors">ABOUT</a>
-          <a href="#team" className="hover:text-[#ff0000] transition-colors">OUR TEAM</a>
-          <a href="#speakers" className="hover:text-[#ff0000] transition-colors">SPEAKERS</a>
-          <a href="#talks" className="hover:text-[#ff0000] transition-colors">TALKS</a>
-          <a href="#highlights" className="hover:text-[#ff0000] transition-colors">HIGHLIGHTS</a>
-        </motion.div>
+  initial={{ y: -100 }}
+  animate={{ y: 0 }}
+  transition={{ type: 'spring', damping: 20 }}
+  className="relative z-10 flex items-center justify-between px-6 md:px-12 py-6"
+>
+  <motion.div 
+    variants={logoVariants}
+    initial="hidden"
+    animate="visible"
+    className="flex items-center space-x-2"
+  >
+    <div className="text-white font-bold text-xl md:text-2xl">
+      TEDx<span className="text-[#ff0000]">PIEAS</span>
+    </div>
+  </motion.div>
+  
+  {/* Desktop Menu */}
+  <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+    className="hidden md:flex space-x-8 text-sm text-white"
+  >
+    <a href="#home" className="hover:text-[#ff0000] transition-colors">HOME</a>
+    <a href="#about" className="hover:text-[#ff0000] transition-colors">ABOUT</a>
+    <a href="#team" className="hover:text-[#ff0000] transition-colors">OUR TEAM</a>
+    <a href="#speakers" className="hover:text-[#ff0000] transition-colors">SPEAKERS</a>
+    <a href="#talks" className="hover:text-[#ff0000] transition-colors">TALKS</a>
+    <a href="#highlights" className="hover:text-[#ff0000] transition-colors">HIGHLIGHTS</a>
+  </motion.div>
 
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="md:hidden text-white"
+  {/* Hamburger Button */}
+  <motion.button
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.6 }}
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    className="md:hidden text-white z-50"
+  >
+    {isMobileMenuOpen ? (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    ) : (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    )}
+  </motion.button>
+</motion.nav>
+
+{/* Mobile Menu */}
+<AnimatePresence>
+  {isMobileMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, x: '100%' }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: '100%' }}
+      transition={{ type: 'tween', duration: 0.3 }}
+      className="fixed inset-0 bg-black bg-opacity-95 z-40 md:hidden"
+    >
+      <div className="flex flex-col items-center justify-center h-full space-y-8 text-lg text-white">
+        <a 
+          href="#home" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </motion.button>
-      </motion.nav>
+          HOME
+        </a>
+        <a 
+          href="#about" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
+        >
+          ABOUT
+        </a>
+        <a 
+          href="#team" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
+        >
+          OUR TEAM
+        </a>
+        <a 
+          href="#speakers" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
+        >
+          SPEAKERS
+        </a>
+        <a 
+          href="#talks" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
+        >
+          TALKS
+        </a>
+        <a 
+          href="#highlights" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="hover:text-[#ff0000] transition-colors"
+        >
+          HIGHLIGHTS
+        </a>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {/* Hero Content */}
       <div className="relative z-10 min-h-screen flex items-center">
@@ -724,7 +791,7 @@ TEDx brings TED’s mission to local communities through independently organized
               { name: "Sara Qureshi", bio: "Aerospace Engineer & CEO", image: "/Speakers/Sarah Quraishi .png" },
               { name: "Azam Jamil", bio: "Former Minister & Leadership Expert", image: "/Speakers/Azam Jamil.png" },
               // { name: "Shahzad Nawaz", bio: "Film Director & Actor", image: "/Speakers/Shahzad nawab.png" },
-                { name: "Hisham Sarwar", bio: "Freelancing Industry Pioneer", image: "/Speakers/Hisham Sarwar.jpeg" },
+                // { name: "Hisham Sarwar", bio: "Freelancing Industry Pioneer", image: "/Speakers/Hisham Sarwar.jpeg" },
   { name: "Brigadier Edgar Felix (Retired)", bio: "Strategic Defence Leader", image: "/Speakers/Brigadier Edgar Felix .png" },
   // { name: "Nasir Majeed Mirza", bio: "Ex-Rector PIEAS & Education Advocate", image: "/Speakers/nasir majeed.jpeg" },
   { name: "Syeda Kashmala", bio: "Climate & Law Changemaker", image: "/Speakers/Syeda Kashmala.png" },
@@ -882,7 +949,7 @@ TEDx brings TED’s mission to local communities through independently organized
   {[
     { name: "Mohib Ullah", role: "Director Finance", image: "/Tedx Directors/Mohib Ullah .jpg" },
     { name: "Taha Zafar", role: "Director Management", image: "/Tedx Directors/tahazaffar.jpg" },
-    { name: "Salman Mansoor", role: "Director Registration", image: "/Tedx Directors/Salman Mansoor (2).png" }
+    { name: "Salman Mansoor", role: "Director Documentation", image: "/Tedx Directors/Salman Mansoor.jpg" }
   ].map((person, idx) => (
     <motion.div
       key={idx}
