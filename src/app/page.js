@@ -848,7 +848,7 @@ TEDx brings TED’s mission to local communities through independently organized
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-black text-white mb-4 text-center"
           >
-            The <span className="text-[#ff0000]">Team</span>
+            The <span className="text-[#ff0000]">Organizing Committee</span>
           </motion.h2>
           <motion.p
             initial={{ y: -20, opacity: 0 }}
@@ -857,7 +857,7 @@ TEDx brings TED’s mission to local communities through independently organized
             transition={{ delay: 0.2 }}
             className="text-white text-center mb-16 text-lg"
           >
-            The Organizing Committee
+            Organizers & Coordinators behind TEDxPIEAS 2025
           </motion.p>
 
           {/* Pyramid Layout */}
