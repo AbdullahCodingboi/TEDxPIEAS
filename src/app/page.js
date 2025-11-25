@@ -1024,7 +1024,7 @@ TEDx brings TED’s mission to local communities through independently organized
             {/* Row 5 - 5 people */}
             <div className="flex flex-wrap justify-center gap-5 w-full max-w-6xl">
               {[
-                { name: "Muhammad Talha Sadiq", role: "Head Social Media", image: "/Tedx Heads/Muhammad Talha Sadiq _ Head social Media.jpg"  },
+    { name: "Umer Farooq", role: "Head Finance", image: "/Tedx Heads/umer farooq.jpg" },
                 { name: "Taha Mumtaz", role: "Head Security", image: "/Tedx Heads/Taha Mumtaz _ Head Security.jpg" },
                 { name: "Mohsan Ali Javed", role: "Head Purchase", image: "/Tedx Heads/Mohsan Ali Javed_Head Purchase .jpg" },
                 { name: "Tuba Zareef", role: "Head Documentation", image: "/Tedx Heads/TubaZareef_Headdocumentation.jpg" },
@@ -1064,7 +1064,6 @@ TEDx brings TED’s mission to local communities through independently organized
     { name: "Hassam Zahid ", role: "Head Outreach", image: "/Tedx Heads/Hassam Zahid _ Head OutReach.jpg" },
     { name: "Sana Shahzad", role: "Head Registration", image: "/Tedx Heads/Head Registration .jpg" },
     { name: "Ali Ammar Wahla", role: "Head operations", image: "/Tedx Heads/Ali Ammar Wahla- Head operations.jpg" },
-    { name: "Umer Farooq", role: "Head Finance", image: "/Tedx Heads/umer farooq.jpg" }
   ].map((person, idx) => (
     <motion.div
       key={idx}
