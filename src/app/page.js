@@ -15,7 +15,7 @@ import PastEvents from '@/components/Misc/PastEvents';
 // Particle system component
 function ParticleField() {
   const points = useRef();
-  const particleCount = 2000;
+  const particleCount = 500;
 
   const particles = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
