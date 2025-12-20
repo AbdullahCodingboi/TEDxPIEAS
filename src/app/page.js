@@ -1197,23 +1197,17 @@ TEDx brings TED’s mission to local communities through independently organized
               <li>
                 <p className="text-white font-semibold text-sm">Rida Aziz</p>
                 <p className="text-gray-400 text-xs">Head Liaison</p>
-                <a href="tel:+923176565132" className="text-white hover:text-[#ff0000] transition-colors text-xs block">
-                  +92 317 6565132
-                </a>
+                
               </li>
               <li>
                 <p className="text-white font-semibold text-sm">Muhammad Bilal</p>
                 <p className="text-gray-400 text-xs">Director Foreign Affairs</p>
-                <a href="tel:+923154399354" className="text-white hover:text-[#ff0000] transition-colors text-xs block">
-                  +92 315 4399354
-                </a>
+               
               </li>
               <li>
                 <p className="text-white font-semibold text-sm">Malik Hassam Zahid</p>
                 <p className="text-gray-400 text-xs">Head Outreach</p>
-                <a href="tel:+923485184940" className="text-white hover:text-[#ff0000] transition-colors text-xs block">
-                  +92 348 5184940
-                </a>
+               
               </li>
             </ul>
           </div>
