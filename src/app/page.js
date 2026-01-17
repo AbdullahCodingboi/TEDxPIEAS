@@ -127,8 +127,8 @@ function Scene() {
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} color="#ff0000" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ff0000" />
-      <ParticleField />
+      {/* <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ff0000" /> */}
+      {/* <ParticleField /> */}
       <FloatingShapes />
     </>
   );
